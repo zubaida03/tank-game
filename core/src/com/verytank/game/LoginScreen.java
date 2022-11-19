@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -25,26 +26,41 @@ public class LoginScreen implements Screen {
     private Stage mStage;
     private Texture blue;
     private Rectangle blueRect;
-    private Texture background;
     private Sprite sprite;
+    private Texture background;
+
     private Rectangle backgroundBounds;
+    private Texture tank;
+    private Rectangle tankRect;
     private Texture login;
     private Texture register;
     private Rectangle loginRect;
     private Rectangle registerRect;
+
+    private  Sprite sprite1;
+
+//    private ShapeRenderer shapeRenderer;
+    int x =0 ;
+    int y = 0 ;
+    int width = Gdx.graphics.getWidth(); ;
+    int height = 0;
+    int x2 = 0 ;
+    int y2 = Gdx.graphics.getHeight(); ;
+    int width2 = Gdx.graphics.getWidth(); ;
+    int height2 = 0;
     public LoginScreen(Very_Tank game) {
         this.game = game;
-        background = new Texture("bg.png");
-        backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        blue = new Texture("Color-blue.jpg");
-        blueRect = new Rectangle(Gdx.graphics.getWidth()-700, 0, 800, Gdx.graphics.getHeight());
-        sprite = new Sprite(blue);
-        sprite.setBounds(blueRect.x, blueRect.y, blueRect.width, blueRect.height);
-        sprite.setColor(0,0,0.3f,0.6f);
         login = new Texture("login.png");
         loginRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-400, 400, 150);
         register = new Texture("register.png");
         registerRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-800, 400, 150);
+        background = new Texture("tank-stars-banner.jpg");
+        backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        tank = new Texture("t2.png");
+        sprite1 = new Sprite(tank);
+        sprite1.setAlpha(0.8f);
+        tankRect = new Rectangle(600, 200, 600, 600);
+        sprite1.setBounds(tankRect.x, tankRect.y, tankRect.width, tankRect.height);
 
 
     }
@@ -57,16 +73,39 @@ public class LoginScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        height+=2;
+        height2-=2;
+//
+        if (height>Gdx.graphics.getHeight()/2){
+            height-=2;
+        }
+        if (Math.abs(height2)>Gdx.graphics.getHeight()/2){
+            height2+=2;
+            game.setScreen(new actuallogin((game)));
+        }
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
         game.batch.enableBlending();
         game.batch.begin();
         game.batch.draw(background,backgroundBounds.x,backgroundBounds.y,backgroundBounds.width,backgroundBounds.height);
 
-        sprite.draw(game.batch);
-        game.batch.draw(login,loginRect.x,loginRect.y,loginRect.width,loginRect.height);
-        game.batch.draw(register,registerRect.x,registerRect.y,registerRect.width,registerRect.height);
+//        sprite1.draw(game.batch);
+//        game.batch.draw(login,loginRect.x,loginRect.y,loginRect.width,loginRect.height);
+//        game.batch.draw(register,registerRect.x,registerRect.y,registerRect.width,registerRect.height);
         game.batch.end();
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        game.shapeRenderer.setColor(new Color(0.8f,0.8f,0.8f,0.5f));
+        game.shapeRenderer.rect(x,y,width,height);
+        game.shapeRenderer.rect(x2,y2,width2,height2);
+        game.shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+
+
     }
 
     @Override
@@ -94,3 +133,7 @@ public class LoginScreen implements Screen {
 
     }
 }
+//add logo to actual login screen
+
+
+//
