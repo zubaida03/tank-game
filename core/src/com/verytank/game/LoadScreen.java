@@ -25,6 +25,7 @@ public class LoadScreen extends ScreenAdapter {
 
     public LoadScreen(Very_Tank game) {
         this.game = game;
+
         batch = new SpriteBatch();
 //        pixmap = new Pixmap(100,20, Pixmap.Format.RGBA8888);
 //        pixmap.setColor(Color.WHITE);
@@ -35,7 +36,14 @@ public class LoadScreen extends ScreenAdapter {
         load_img = new Texture(Gdx.files.internal("loader.png"));
         load_img_rect = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         load_sign = new Texture(Gdx.files.internal("load_line.png"));
-        load_sign_rect = new Rectangle(710, 0, 500, 300);
+        //load_sign_rect = new Rectangle(710, 0, 500, 300);
+        load_sign_rect = new Rectangle((int)(Gdx.graphics.getWidth()*0.3697), 0, (int)(Gdx.graphics.getWidth()*0.2604), (int)(Gdx.graphics.getHeight()*0.2777));
+
+        //load_sign_rect = new Rectangle(710, 0, (int)(Gdx.graphics.getWidth()*0.2604), (int)(Gdx.graphics.getHeight()*0.2777));
+
+        //System.out.println(Gdx.graphics.getWidth());
+        //System.out.println(Gdx.graphics.getHeight());
+
     }
     @Override
     public void show(){
