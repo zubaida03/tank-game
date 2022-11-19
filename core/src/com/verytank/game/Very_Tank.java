@@ -26,9 +26,9 @@ public class Very_Tank extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 
-		ShapeRenderer shapeRenderer = new ShapeRenderer();
+		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen(new LoadScreen(this));
+		setScreen(new MainMenu(this));
 	}
 
 

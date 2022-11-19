@@ -10,8 +10,8 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Very Tank");
-		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-		config.setWindowedMode(800, 580);
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		//config.setWindowedMode(800, 580);
 		new Lwjgl3Application(new Very_Tank(), config);
 	}
 }
