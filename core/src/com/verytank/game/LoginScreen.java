@@ -40,14 +40,14 @@ public class LoginScreen implements Screen {
     private  Sprite sprite1;
 
 //    private ShapeRenderer shapeRenderer;
-    int x =0 ;
-    int y = 0 ;
-    int width = Gdx.graphics.getWidth(); ;
-    int height = 0;
-    int x2 = 0 ;
-    int y2 = Gdx.graphics.getHeight(); ;
-    int width2 = Gdx.graphics.getWidth(); ;
-    int height2 = 0;
+    int x =Gdx.graphics.getWidth()/2 ;
+    int y = 150 ;
+    int width = 0;
+    int height = 800;
+    int x2 = Gdx.graphics.getWidth()/2;
+    int y2 = 150; ;
+    int width2 = 0; ;
+    int height2 = 800;
     public LoginScreen(Very_Tank game) {
         this.game = game;
         login = new Texture("login.png");
@@ -73,14 +73,15 @@ public class LoginScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        height+=2;
-        height2-=2;
+        width-=2;
+        width2+=2;
 //
-        if (height>Gdx.graphics.getHeight()/2){
-            height-=2;
+        if (width2>Gdx.graphics.getWidth()/2){
+            width2-=2;
+            game.setScreen(new actuallogin((game)));
         }
-        if (Math.abs(height2)>Gdx.graphics.getHeight()/2){
-            height2+=2;
+        if (Math.abs(height)>Gdx.graphics.getWidth()/2){
+            width+=2;
             game.setScreen(new actuallogin((game)));
         }
 
@@ -99,7 +100,7 @@ public class LoginScreen implements Screen {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        game.shapeRenderer.setColor(new Color(0.8f,0.8f,0.8f,0.5f));
+        game.shapeRenderer.setColor(new Color(0.1f,0.4f,0.6f,0.8f));
         game.shapeRenderer.rect(x,y,width,height);
         game.shapeRenderer.rect(x2,y2,width2,height2);
         game.shapeRenderer.end();

@@ -39,7 +39,7 @@ public class actuallogin implements Screen {
         login = new Texture("register.png");
         loginRect = new Rectangle(800, Gdx.graphics.getHeight()-500, 300, 100);
         sign = new Texture("signin.png");
-        signRect = new Rectangle(800, Gdx.graphics.getHeight()-700, 300, 100);
+        signRect = new Rectangle(800, Gdx.graphics.getHeight()-800, 300, 100);
 
 //        textu = new Texture("texture.jpg");
 //        textuRect = new Rectangle(0, 0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -69,10 +69,10 @@ public class actuallogin implements Screen {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        game.shapeRenderer.setColor(new Color(0.8f,0.8f,0.8f,0.5f));
-        game.shapeRenderer.rect(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.shapeRenderer.setColor(new Color(0.1f,0.5f,0.7f,0.95f));
-        game.shapeRenderer.rect(450,150,1000,800);
+//        game.shapeRenderer.setColor(new Color(0.8f,0.8f,0.8f,0.5f));
+//        game.shapeRenderer.rect(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.shapeRenderer.setColor(new Color(0.1f,0.4f,0.6f,0.8f));
+        game.shapeRenderer.rect(0,150,Gdx.graphics.getWidth(), 800);
 //        game.shapeRenderer.rect(x2,y2,width2,height2);
         game.shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
