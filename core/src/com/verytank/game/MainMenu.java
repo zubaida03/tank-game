@@ -12,7 +12,9 @@ package com.verytank.game;
         import com.badlogic.gdx.graphics.OrthographicCamera;
         import com.badlogic.gdx.graphics.Pixmap;
         import com.badlogic.gdx.graphics.Texture;
+        import com.badlogic.gdx.graphics.g2d.Animation;
         import com.badlogic.gdx.graphics.g2d.Sprite;
+        import com.badlogic.gdx.graphics.g2d.SpriteBatch;
         import com.badlogic.gdx.graphics.g2d.TextureRegion;
         import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
         import com.badlogic.gdx.utils.ScreenUtils;
@@ -22,6 +24,7 @@ package com.verytank.game;
 
 public class MainMenu implements Screen {
     static Pixmap pixmap;
+    SpriteBatch batch;
     final Very_Tank game;
     Sprite sprite;
     private Texture blue;
@@ -34,9 +37,16 @@ public class MainMenu implements Screen {
     private Texture backgroundImage;
     private TextureRegion backgroundTexture;
     MyShapeRenderer shapeRender=new MyShapeRenderer();
+    Texture ani;
+    TextureRegion[] aniFrame;
+    Animation animation;
+    float elapsedTime;
+
+
     //OrthographicCamera camera;
 
     public MainMenu(final Very_Tank game) {
+        batch= new SpriteBatch();
         this.game = game;
         backgroundImage = new Texture(Gdx.files.internal("bg.png"));
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -55,7 +65,18 @@ public class MainMenu implements Screen {
         resumeRect = new Rectangle(Gdx.graphics.getWidth()-550+20, Gdx.graphics.getHeight()-400+20, 400-45, 150-45);
         newGame = new Texture("newgame.jpg");
         newGameRect = new Rectangle(Gdx.graphics.getWidth()-550+20, Gdx.graphics.getHeight()-800+20, 400-45, 150-45);
+        ani=new Texture("tankani.png");
+        TextureRegion[][] tmpFrame= TextureRegion.split(ani, 295, 211);
+        aniFrame=new TextureRegion[4];
+        int index=0;
 
+        for (int i=0; i<2; i++){
+            for (int j=0; j<2; j++){
+                aniFrame[index++]=tmpFrame[j][i];
+            }
+        }
+        //System.out.println(aniFrame);
+        animation=new Animation<TextureRegion>(1f/4f,aniFrame);
         //camera = new OrthographicCamera();
         //camera.setToOrtho(false, 800, 480);
     }
@@ -93,6 +114,8 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
+        elapsedTime+=Gdx.graphics.getDeltaTime();
+        batch.begin();
         //game.shapeRenderer.begin();
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -106,9 +129,11 @@ public class MainMenu implements Screen {
         game.batch.draw(resume,resumeRect.x,resumeRect.y,resumeRect.width,resumeRect.height);
         game.batch.draw(pixmaptex,Gdx.graphics.getWidth()-550+5, Gdx.graphics.getHeight()-800+5, 400-15, 150-15);
         game.batch.draw(newGame,newGameRect.x,newGameRect.y,newGameRect.width,newGameRect.height);
+        batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime,true),300, 300, 600,432);
+
         //game.batch.draw(shapeRender,shapeRender.x, );
         game.batch.end();
-
+batch.end();
 //        if (Gdx.input.isTouched()) {
 //            game.setScreen(new GameScreen(game));
 //            dispose();
