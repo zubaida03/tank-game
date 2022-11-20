@@ -73,15 +73,15 @@ public class LoginScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        width-=2;
-        width2+=2;
+        width-=7;
+        width2+=7;
 //
         if (width2>Gdx.graphics.getWidth()/2){
-            width2-=2;
+            width2-=7;
             game.setScreen(new actuallogin((game)));
         }
         if (Math.abs(height)>Gdx.graphics.getWidth()/2){
-            width+=2;
+            width+=7;
             game.setScreen(new actuallogin((game)));
         }
 
