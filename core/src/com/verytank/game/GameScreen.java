@@ -50,16 +50,29 @@ public class GameScreen implements Screen {
         groundBounds=new Rectangle(-10,-40,Gdx.graphics.getWidth()+40,Gdx.graphics.getHeight()+40);
 
         playerBadgeImage1=new Texture(Gdx.files.internal("playerBadge.png"));
-        playerBadgeBounds1 =new Rectangle(350, Gdx.graphics.getHeight()-130, 130,130);
+        playerBadgeBounds1 =new Rectangle(350+12, Gdx.graphics.getHeight()-130, 130,130);
 
         playerBadgeImage2=new Texture(Gdx.files.internal("playerBadge.png"));
-        playerBadgeBounds2 =new Rectangle(Gdx.graphics.getWidth()-350-130, Gdx.graphics.getHeight()-130, 130,130);
+        playerBadgeBounds2 =new Rectangle(Gdx.graphics.getWidth()-350-130+40, Gdx.graphics.getHeight()-130, 130,130);
 
         healthImage1=new Texture(Gdx.files.internal("health.png"));
-        healthBounds1=new Rectangle(350+100, Gdx.graphics.getHeight()-95, 400,61);
+        healthBounds1=new Rectangle(350+100+6, Gdx.graphics.getHeight()-95, 400,61);
 
         healthImage2=new Texture(Gdx.files.internal("health.png"));
         healthBounds2=new Rectangle(Gdx.graphics.getWidth()-350-100-400-30+50, Gdx.graphics.getHeight()-95, 400,61);
+
+        health2Image1=new Texture(Gdx.files.internal("health2.png"));
+        health2Bounds1=new Rectangle(350+100+6+5, Gdx.graphics.getHeight()-91, 390,53);
+
+        health2Image2=new Texture(Gdx.files.internal("health2.png"));
+        health2Bounds2=new Rectangle(Gdx.graphics.getWidth()-350-100-400-30+50+5, Gdx.graphics.getHeight()-91, 390,53);
+
+
+        vsImage =new Texture("vs.png");
+        vsBounds=new Rectangle(456+65+400+3,Gdx.graphics.getHeight()-125, 100,100 );
+
+        //System.out.println(Gdx.graphics.getHeight());
+        //System.out.println(Gdx.graphics.getWidth());
     }
 
 
@@ -74,6 +87,10 @@ public class GameScreen implements Screen {
         game.batch.draw(playerBadgeImage2,playerBadgeBounds2.x,playerBadgeBounds2.y,playerBadgeBounds2.width,playerBadgeBounds2.height);
         game.batch.draw(healthImage1,healthBounds1.x,healthBounds1.y,healthBounds1.width,healthBounds1.height);
         game.batch.draw(healthImage2,healthBounds2.x,healthBounds2.y,healthBounds2.width,healthBounds2.height);
+        game.batch.draw(health2Image1,health2Bounds1.x,health2Bounds1.y,health2Bounds1.width,health2Bounds1.height);
+        game.batch.draw(health2Image2,health2Bounds2.x,health2Bounds2.y,health2Bounds2.width,health2Bounds2.height);
+
+        game.batch.draw(vsImage,vsBounds.x,vsBounds.y,vsBounds.width,vsBounds.height);
 
 
         //sprite.draw(game.batch);
