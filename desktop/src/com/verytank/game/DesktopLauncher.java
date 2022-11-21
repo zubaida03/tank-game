@@ -1,5 +1,6 @@
 package com.verytank.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.verytank.game.Very_Tank;
@@ -12,6 +13,8 @@ public class DesktopLauncher {
 		config.setTitle("Very Tank");
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		//config.setWindowedMode(800, 580);
+		//System.out.println(Gdx.graphics.getHeight());
+		//System.out.println(Gdx.graphics.getWidth());
 		new Lwjgl3Application(new Very_Tank(), config);
 	}
 }
