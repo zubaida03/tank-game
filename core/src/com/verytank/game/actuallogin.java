@@ -78,7 +78,6 @@ public class actuallogin implements Screen {
         savebutton.setSize(300, 100);
         savebutton.addListener(new ClickListener() {
             @Override
-            //cope
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new saved_Games(game));
             }
