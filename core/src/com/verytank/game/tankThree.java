@@ -8,6 +8,7 @@ public class tankThree implements tanks{
     Texture ani;
     TextureRegion[] aniFrame;
     Animation animation;
+    Texture background;
 
     public Animation getAnimation(){
         ani=new Texture("tank3.png");
