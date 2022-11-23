@@ -28,7 +28,7 @@ public class Very_Tank extends Game {
 
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen(new saved_Games(this));
+		setScreen(new new_game(this));
 	}
 
 
