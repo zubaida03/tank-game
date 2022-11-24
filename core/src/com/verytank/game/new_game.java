@@ -37,7 +37,7 @@ public class new_game implements Screen {
     private Texture background;
     private Rectangle backgroundBounds;
     private Sprite sprite1;
-    float elapsedTime;
+    private float elapsedTime;
     private Texture name;
     private Rectangle nameRect;
     private Texture selectanks;
@@ -108,6 +108,10 @@ public class new_game implements Screen {
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 tank1_button.setSize(300,300);
             }
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new tank1_details(game));
+            }
         });
         tank2_button.addListener(new ClickListener() {
             @Override
@@ -117,6 +121,10 @@ public class new_game implements Screen {
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 tank2_button.setSize(300,300);
+            }
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new tank2_details(game));
             }
         });
         tank3_button.addListener(new ClickListener() {
@@ -129,6 +137,10 @@ public class new_game implements Screen {
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 tank3_button.setSize(300,300);
 //                tank3_button.setPosition(1200, 200);
+            }
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new tank3_details(game));
             }
         });
         TextField = new TextField("", mSkin);
@@ -204,6 +216,14 @@ public class new_game implements Screen {
 
     @Override
     public void dispose() {
-
+        name.dispose();
+        tan1_img.dispose();
+        tan2_img.dispose();
+        tan3_img.dispose();
+        selectanks.dispose();
+        logo.dispose();
+        background.dispose();
+        stage.dispose();
     }
 }
+
