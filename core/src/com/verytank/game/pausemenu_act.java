@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.awt.*;
 
-public class pausemenu implements Screen {
+public class pausemenu_act implements Screen {
     private Very_Tank game;
     private SpriteBatch batch;
     private Rectangle backgroundBounds;
@@ -43,18 +43,9 @@ public class pausemenu implements Screen {
 
     private Texture pauseImage;
     private Rectangle pauseBounds;
-    private int x =Gdx.graphics.getWidth()/2 ;
-    private int y = 150 ;
-    private int width = 0;
-    private int height = 800;
-    private int x2 = Gdx.graphics.getWidth()/2;
-    private int y2 = 150; ;
-    private int width2 = 0; ;
-    private int height2 = 800;
     private Texture pausemenuImage;
     private Rectangle pausemenuBounds;
-    public pausemenu(Very_Tank game) {
-        batch= new SpriteBatch();
+    public pausemenu_act(Very_Tank game) {
         this.game = game;
         backgroundImage = new Texture(Gdx.files.internal("game_background.png"));
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -82,9 +73,9 @@ public class pausemenu implements Screen {
 
         vsImage =new Texture("vs.png");
         vsBounds=new Rectangle(456+65+400+3,Gdx.graphics.getHeight()-125, 100,100 );
+        pausemenuImage = new Texture(Gdx.files.internal("pause_img.png"));
+        pausemenuBounds = new Rectangle(Gdx.graphics.getWidth()/2-200, Gdx.graphics.getHeight()/2 - 300, 500, 600);
 
-        //System.out.println(Gdx.graphics.getHeight());
-        //System.out.println(Gdx.graphics.getWidth());
     }
 
     @Override
@@ -108,36 +99,20 @@ public class pausemenu implements Screen {
         game.batch.draw(health2Image2,health2Bounds2.x,health2Bounds2.y,health2Bounds2.width,health2Bounds2.height);
 
         game.batch.draw(vsImage,vsBounds.x,vsBounds.y,vsBounds.width,vsBounds.height);
-
-
-        //sprite.draw(game.batch);
         game.batch.end();
-        width-=7;
-        width2+=7;
-//
-        if (width2>Gdx.graphics.getWidth()/2){
-            width2-=7;
-            game.setScreen(new pausemenu_act(game));
-
-
-//            game.setScreen(new actuallogin((game)));
-        }
-        if (Math.abs(height)>Gdx.graphics.getWidth()/2){
-            width+=7;
-
-            game.setScreen(new pausemenu_act(game));
-        }
-
-        game.batch.enableBlending();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+//        game.shapeRenderer.setColor(new Color(0.8f,0.8f,0.8f,0.5f));
+//        game.shapeRenderer.rect(0,0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.shapeRenderer.setColor(new Color(0.1f,0.4f,0.6f,0.8f));
-        game.shapeRenderer.rect(x,y,width,height);
-        game.shapeRenderer.rect(x2,y2,width2,height2);
+        game.shapeRenderer.rect(0,150,Gdx.graphics.getWidth(), 800);
+//        game.shapeRenderer.rect(x2,y2,width2,height2);
         game.shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
-
+        game.batch.begin();
+        game.batch.draw(pausemenuImage,pausemenuBounds.x,pausemenuBounds.y,pausemenuBounds.width,pausemenuBounds.height);
+        game.batch.end();
     }
 
     @Override

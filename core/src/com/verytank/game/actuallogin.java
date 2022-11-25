@@ -49,13 +49,13 @@ public class actuallogin implements Screen {
         tank = new Texture("t2.png");
         sprite1 = new Sprite(tank);
         sprite1.setAlpha(0.8f);
-        tankRect = new Rectangle(600, 200, 600, 600);
+        tankRect = new Rectangle((int)(Gdx.graphics.getWidth()*0.3125), 200, 600, 600);
         logo = new Texture("download-removebg-preview.png");
-        logo_rect = new Rectangle(650, 600, 600, 600);
+        logo_rect = new Rectangle((int)(Gdx.graphics.getWidth()*0.3385), 600, 600, 600);
         login = new Texture("register.png");
-        loginRect = new Rectangle(800, Gdx.graphics.getHeight()-500, 300, 100);
+        loginRect = new Rectangle((int)(Gdx.graphics.getWidth()*0.4166), Gdx.graphics.getHeight()-500, 300, 100);
         sign = new Texture("signin.png");
-        signRect = new Rectangle(800, Gdx.graphics.getHeight()-800, 300, 100);
+        signRect = new Rectangle((int)(Gdx.graphics.getWidth()*0.4166), Gdx.graphics.getHeight()-800, 300, 100);
         savedgame = new TextureRegion(login);
         saveddrawble = new TextureRegionDrawable(savedgame);
         newgame = new TextureRegion(sign);
