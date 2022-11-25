@@ -10,35 +10,39 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.awt.*;
 
 public class GameScreen implements Screen {
-    final Very_Tank game;
-    SpriteBatch batch;
-    Rectangle backgroundBounds;
+    private final Very_Tank game;
+    private SpriteBatch batch;
+    private Rectangle backgroundBounds;
 
-    Texture backgroundImage;
+    private Texture backgroundImage;
 
-    Texture groundImage;
-    Rectangle groundBounds;
+    private Texture groundImage;
+    private Rectangle groundBounds;
 
-    Texture playerBadgeImage1;
-    Rectangle playerBadgeBounds1;
+    private Texture playerBadgeImage1;
+    private Rectangle playerBadgeBounds1;
 
-    Texture playerBadgeImage2;
-    Rectangle playerBadgeBounds2;
+    private Texture playerBadgeImage2;
+    private Rectangle playerBadgeBounds2;
 
-    Texture healthImage1;
-    Rectangle healthBounds1;
+    private Texture healthImage1;
+    private Rectangle healthBounds1;
 
-    Texture healthImage2;
-    Rectangle healthBounds2;
+    private Texture healthImage2;
+    private Rectangle healthBounds2;
 
-    Texture health2Image1;
-    Rectangle health2Bounds1;
+    private Texture health2Image1;
+    private Rectangle health2Bounds1;
 
-    Texture health2Image2;
-    Rectangle health2Bounds2;
+    private Texture health2Image2;
+    private Rectangle health2Bounds2;
 
-    Texture vsImage;
-    Rectangle vsBounds;
+    private Texture vsImage;
+    private Rectangle vsBounds;
+
+    private Texture pauseImage;
+    private Rectangle pauseBounds;
+
 
 
     public GameScreen(final Very_Tank game){
