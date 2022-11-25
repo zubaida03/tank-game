@@ -4,10 +4,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class tankTwo implements tanks{
+public class tankTwo implements tankAnimation{
     Texture ani;
     TextureRegion[] aniFrame;
-    Animation animation;
+    private Animation animation;
 
     public Animation getAnimation(){
         ani=new Texture("tankTwo.png");

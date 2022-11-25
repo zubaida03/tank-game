@@ -20,13 +20,13 @@ public class Very_Tank extends Game {
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
-	ShapeRenderer shapeRenderer;
+	//ShapeRenderer shapeRenderer;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-		shapeRenderer = new ShapeRenderer();
+		//shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
 		setScreen(new LoginScreen(this));
 	}
