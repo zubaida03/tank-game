@@ -21,8 +21,8 @@ import java.awt.*;
 
 public class actuallogin implements Screen {
     private Very_Tank game;
-    private Texture textu;
-    private Rectangle textuRect;
+//    private Texture textu;
+//    private Rectangle textuRect;
     private Texture background;
 
     private Rectangle backgroundBounds;
@@ -153,7 +153,7 @@ public class actuallogin implements Screen {
     @Override
     public void dispose() {
         game.dispose();
-        textu.dispose();
+//        textu.dispose();
 //        textuRect.dispose();
         background.dispose();
         tank.dispose();

@@ -19,7 +19,7 @@ public class saved_Games implements Screen {
     private Texture background;
     private Rectangle backgroundBounds;
     private Sprite sprite1;
-    float elapsedTime;
+    private float elapsedTime;
     private Texture name;
     private Rectangle nameRect;
     private Texture selectanks;

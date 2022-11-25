@@ -57,6 +57,9 @@ public class new_game implements Screen {
     private TextField TextField;
     private Skin mSkin;
     private TextureAtlas atlas;
+    private TextureRegion confirm;
+    private TextureRegionDrawable confirm_drawable;
+    private ImageButton confirm_button;
     public new_game(Very_Tank game){
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -77,6 +80,8 @@ public class new_game implements Screen {
         tank2_drawable = new TextureRegionDrawable(tank2_region);
         tank3_region = new TextureRegion(tan3_img);
         tank3_drawable = new TextureRegionDrawable(tank3_region);
+        confirm = new TextureRegion(new Texture("confirm.png"));
+        confirm_drawable = new TextureRegionDrawable(confirm);
         
 
     }
@@ -92,6 +97,9 @@ public class new_game implements Screen {
         tank3_button = new ImageButton(tank3_drawable);
         tank3_button.setPosition(1200, 100);
         tank3_button.setSize(300,300);
+        confirm_button = new ImageButton(confirm_drawable);
+        confirm_button.setSize(200, 100);
+        confirm_button.setPosition(300, 300);
         stage = new Stage(new ScreenViewport());
         mSkin = new Skin(Gdx.files.internal("uiskin.json"));
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
@@ -99,6 +107,7 @@ public class new_game implements Screen {
         stage.addActor(tank1_button);
         stage.addActor(tank2_button);
         stage.addActor(tank3_button);
+//        stage.addActor(confirm_but/**/ton);
         tank1_button.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -138,7 +147,7 @@ public class new_game implements Screen {
                 tank3_button.setSize(300,300);
 //                tank3_button.setPosition(1200, 200);
             }
-            @Override
+             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new tank3_details(game));
             }
@@ -183,10 +192,6 @@ public class new_game implements Screen {
         game.batch.draw(name,nameRect.x+50,nameRect.y-130,nameRect.width,nameRect.height);
         game.batch.draw(selectanks,selectanksRect.x+50,selectanksRect.y-30,selectanksRect.width,selectanksRect.height);
         game.batch.draw(logo,logo_rect.x,logo_rect.y,logo_rect.width,logo_rect.height);
-//        game.batch.draw(background,backgroundBounds.x,backgroundBounds.y,backgroundBounds.width,backgroundBounds.height);
-//        game.batch.draw((TextureRegion) tank3.getAnimation().getKeyFrame(elapsedTime, true), 400, 200);
-//        game.batch.draw((TextureRegion) tank2.getAnimation().getKeyFrame(elapsedTime, true), 1200, 200);
-//        game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 800, 200);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

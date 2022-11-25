@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.awt.*;
 
@@ -28,6 +33,10 @@ public class tank2_details implements Screen {
 //    tank details
     private Texture details;
     private Rectangle detailsRect;
+    private TextureRegion confirm;
+    private TextureRegionDrawable confirm_drawable;
+    private ImageButton confirm_button;
+    private Stage stage;
     public tank2_details (Very_Tank game) {
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -38,10 +47,25 @@ public class tank2_details implements Screen {
         tankRect = new Rectangle(600, 200, 600, 600);
         details = new Texture("tank2_details.png");
         detailsRect = new Rectangle(900, 200, 900, 700);
+        confirm = new TextureRegion(new Texture("confirm.png"));
+        confirm_drawable = new TextureRegionDrawable(confirm);
     }
 
     @Override
     public void show() {
+        stage = new Stage();
+        confirm_button = new ImageButton(confirm_drawable);
+        confirm_button.setSize(200, 100);
+        confirm_button.setPosition(300, 300);
+        stage.addActor(confirm_button);
+        Gdx.input.setInputProcessor(stage);
+
+        confirm_button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new new_game(game));
+            }
+        });
 
     }
 
@@ -71,6 +95,8 @@ public class tank2_details implements Screen {
         game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 200, 400,450,400);
         game.batch.draw(details, detailsRect.x, detailsRect.y, detailsRect.width, detailsRect.height);
         game.batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
 
     }
 
