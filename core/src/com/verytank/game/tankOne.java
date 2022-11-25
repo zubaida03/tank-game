@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class tankOne implements tanks{
+public class tankOne implements tankAnimation{
     Texture ani;
     TextureRegion[] aniFrame;
-    Animation animation;
+    private Animation animation;
 
     public Animation getAnimation(){
         ani=new Texture("tankani.png");
