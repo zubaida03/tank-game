@@ -20,47 +20,47 @@ import java.awt.*;
 
 public class LoginScreen implements Screen {
     Very_Tank game;
-    private TextInputListener newtext;
-    private TextButton button;
-    private Skin mSkin;
-    private Stage mStage;
-    private Texture blue;
-    private Rectangle blueRect;
-    private Sprite sprite;
+//    private TextInputListener newtext;
+//    private TextButton button;
+//    private Skin mSkin;
+//    private Stage mStage;
+//    private Texture blue;
+//    private Rectangle blueRect;
+//    private Sprite sprite;
     private Texture background;
 
     private Rectangle backgroundBounds;
-    private Texture tank;
-    private Rectangle tankRect;
-    private Texture login;
-    private Texture register;
-    private Rectangle loginRect;
-    private Rectangle registerRect;
+//    private Texture tank;
+//    private Rectangle tankRect;
+//    private Texture login;
+//    private Texture register;
+//    private Rectangle loginRect;
+//    private Rectangle registerRect;
 
-    private  Sprite sprite1;
+//    private  Sprite sprite1;
 
 //    private ShapeRenderer shapeRenderer;
-    int x =Gdx.graphics.getWidth()/2 ;
-    int y = 150 ;
-    int width = 0;
-    int height = 800;
-    int x2 = Gdx.graphics.getWidth()/2;
-    int y2 = 150; ;
-    int width2 = 0; ;
-    int height2 = 800;
+    private int x =Gdx.graphics.getWidth()/2 ;
+    private int y = 150 ;
+    private int width = 0;
+    private int height = 800;
+    private int x2 = Gdx.graphics.getWidth()/2;
+    private int y2 = 150; ;
+    private int width2 = 0; ;
+    private int height2 = 800;
     public LoginScreen(Very_Tank game) {
         this.game = game;
-        login = new Texture("login.png");
-        loginRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-400, 400, 150);
-        register = new Texture("register.png");
-        registerRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-800, 400, 150);
+//        login = new Texture("login.png");
+//        loginRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-400, 400, 150);
+//        register = new Texture("register.png");
+//        registerRect = new Rectangle(Gdx.graphics.getWidth()-600, Gdx.graphics.getHeight()-800, 400, 150);
         background = new Texture("tank-stars-banner.jpg");
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        tank = new Texture("t2.png");
-        sprite1 = new Sprite(tank);
-        sprite1.setAlpha(0.8f);
-        tankRect = new Rectangle(600, 200, 600, 600);
-        sprite1.setBounds(tankRect.x, tankRect.y, tankRect.width, tankRect.height);
+//        tank = new Texture("t2.png");
+//        sprite1 = new Sprite(tank);
+//        sprite1.setAlpha(0.8f);
+//        tankRect = new Rectangle(600, 200, 600, 600);
+//        sprite1.setBounds(tankRect.x, tankRect.y, tankRect.width, tankRect.height);
 
 
     }

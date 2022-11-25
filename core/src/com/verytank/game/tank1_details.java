@@ -42,6 +42,8 @@ public class tank1_details implements Screen {
     private TextureRegionDrawable confirm_drawable;
     private ImageButton confirm_button;
     private Stage stage;
+    private Texture backButton;
+    private Rectangle backButtonRect;
     public tank1_details (Very_Tank game) {
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -58,6 +60,8 @@ public class tank1_details implements Screen {
         t1blurRect = new Rectangle(400, 200, 300, 200);
         confirm = new TextureRegion(new Texture("confirm.png"));
         confirm_drawable = new TextureRegionDrawable(confirm);
+        backButton = new Texture("back_button.png");
+        backButtonRect = new Rectangle(80, 800, 100, 100);
     }
 
     @Override
@@ -103,6 +107,8 @@ public class tank1_details implements Screen {
         tank1.getAnimation();
         game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 200, 400,450,400);
         game.batch.draw(details, detailsRect.x, detailsRect.y, detailsRect.width, detailsRect.height);
+        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
+
 //        game.batch.draw(t2blur, t2blurRect.x, t2blurRect.y, t2blurRect.width, t2blurRect.height);
 //        game.batch.draw(t1blur, t1blurRect.x, t1blurRect.y, t1blurRect.width, t1blurRect.height);
         game.batch.end();

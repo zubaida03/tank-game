@@ -36,6 +36,8 @@ public class tank3_details implements Screen {
     private TextureRegionDrawable confirm_drawable;
     private ImageButton confirm_button;
     private Stage stage;
+    private Texture backButton;
+    private Rectangle backButtonRect;
     public tank3_details (Very_Tank game) {
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -48,6 +50,8 @@ public class tank3_details implements Screen {
         detailsRect = new Rectangle(900, 200, 900, 700);
         confirm = new TextureRegion(new Texture("confirm.png"));
         confirm_drawable = new TextureRegionDrawable(confirm);
+        backButton = new Texture("back_button.png");
+        backButtonRect = new Rectangle(80, 800, 100, 100);
     }
 
     @Override
@@ -92,6 +96,7 @@ public class tank3_details implements Screen {
         tank1.getAnimation();
         game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 200, 400,450,400);
         game.batch.draw(details, detailsRect.x, detailsRect.y, detailsRect.width, detailsRect.height);
+        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

@@ -60,6 +60,10 @@ public class new_game implements Screen {
     private TextureRegion confirm;
     private TextureRegionDrawable confirm_drawable;
     private ImageButton confirm_button;
+    private Texture backButton;
+    private Rectangle backButtonRect;
+    private Texture nextButton;
+    private Rectangle nextButtonRect;
     public new_game(Very_Tank game){
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -82,6 +86,10 @@ public class new_game implements Screen {
         tank3_drawable = new TextureRegionDrawable(tank3_region);
         confirm = new TextureRegion(new Texture("confirm.png"));
         confirm_drawable = new TextureRegionDrawable(confirm);
+        backButton = new Texture("back_button.png");
+        backButtonRect = new Rectangle(80, 800, 100, 100);
+        nextButton = new Texture("next_button.png");
+        nextButtonRect = new Rectangle(Gdx.graphics.getWidth()-200, 800, 100, 100);
         
 
     }
@@ -192,6 +200,8 @@ public class new_game implements Screen {
         game.batch.draw(name,nameRect.x+50,nameRect.y-130,nameRect.width,nameRect.height);
         game.batch.draw(selectanks,selectanksRect.x+50,selectanksRect.y-30,selectanksRect.width,selectanksRect.height);
         game.batch.draw(logo,logo_rect.x,logo_rect.y,logo_rect.width,logo_rect.height);
+        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
+        game.batch.draw(nextButton, nextButtonRect.x, nextButtonRect.y, nextButtonRect.width, nextButtonRect.height);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
