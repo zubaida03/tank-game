@@ -17,11 +17,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import  com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import  com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import java.awt.*;
-import java.awt.event.TextListener;
 
 public class new_game implements Screen {
     private Texture tan1_img;
@@ -64,6 +62,24 @@ public class new_game implements Screen {
     private Rectangle backButtonRect;
     private Texture nextButton;
     private Rectangle nextButtonRect;
+    private TextureRegion next_region;
+    private TextureRegionDrawable next_drawable;
+    private ImageButton next_button;
+    private Texture tick;
+    private TextureRegion button_region;
+    private TextureRegionDrawable button_drawable;
+    private TextureRegion tick_img;
+    private TextureRegionDrawable tick_drawable;
+    private ImageButton tick_button;
+    public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height){
+        region = new TextureRegion(new Texture(address));
+        drawable = new TextureRegionDrawable(region);
+        button = new ImageButton(drawable);
+        button.setPosition(x, y);
+        button.setSize(width, height);
+        stage.addActor(button);
+        return button;
+    }
     public new_game(Very_Tank game){
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -75,47 +91,20 @@ public class new_game implements Screen {
         logo = new Texture("download-removebg-preview.png");
         logo_rect = new Rectangle(650, 600, 600, 600);
         tan1_img = new Texture("tank1_img.png");
-        tan2_img = new Texture("tan2_img.png");
-        tan3_img = new Texture("tan3_img.png");
-
-        tank1_region = new TextureRegion(tan1_img);
-        tank1_drawable = new TextureRegionDrawable(tank1_region);
-        tank2_region = new TextureRegion(tan2_img);
-        tank2_drawable = new TextureRegionDrawable(tank2_region);
-        tank3_region = new TextureRegion(tan3_img);
-        tank3_drawable = new TextureRegionDrawable(tank3_region);
-        confirm = new TextureRegion(new Texture("confirm.png"));
-        confirm_drawable = new TextureRegionDrawable(confirm);
-        backButton = new Texture("back_button.png");
-        backButtonRect = new Rectangle(80, 800, 100, 100);
-        nextButton = new Texture("next_button.png");
-        nextButtonRect = new Rectangle(Gdx.graphics.getWidth()-200, 800, 100, 100);
-        
-
     }
 
     @Override
     public void show() {
-        tank1_button = new ImageButton(tank1_drawable);
-        tank1_button.setPosition(400, 100);
-        tank1_button.setSize(300,300);
-        tank2_button = new ImageButton(tank2_drawable);
-        tank2_button.setPosition(800, 70);
-        tank2_button.setSize(300,300);
-        tank3_button = new ImageButton(tank3_drawable);
-        tank3_button.setPosition(1200, 100);
-        tank3_button.setSize(300,300);
-        confirm_button = new ImageButton(confirm_drawable);
-        confirm_button.setSize(200, 100);
-        confirm_button.setPosition(300, 300);
         stage = new Stage(new ScreenViewport());
         mSkin = new Skin(Gdx.files.internal("uiskin.json"));
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
         mSkin.addRegions(atlas);
-        stage.addActor(tank1_button);
-        stage.addActor(tank2_button);
-        stage.addActor(tank3_button);
-//        stage.addActor(confirm_but/**/ton);
+        tank1_button=buttonmaker("tank1_img.png",tank1_region, tank1_drawable, tank1_button, 400, 100, 300, 300);
+        tank2_button=buttonmaker("tan2_img.png",tank2_region, tank2_drawable, tank2_button, 800, 70, 300, 300);
+        tank3_button=buttonmaker("tan3_img.png",tank3_region, tank3_drawable, tank3_button, 1200, 100, 300, 300);
+        tick_button=buttonmaker("tick.png",tick_img, tick_drawable, tick_button, 1060, 590, 40, 40);
+        ImageButton back_button = buttonmaker("back_button.png", button_region, button_drawable, tick_button, 80, 800, 100, 100);
+        next_button=buttonmaker("next_button.png",next_region, next_drawable, next_button,Gdx.graphics.getWidth()-200, 800, 100, 100);
         tank1_button.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
@@ -166,6 +155,16 @@ public class new_game implements Screen {
         TextField.setColor(0.2f, 0.2f, 0.7f, 0.9f);
         TextField.setPosition(Gdx.graphics.getWidth()/2-TextField.getWidth()/2 -10, Gdx.graphics.getHeight()/2+50);
         stage.addActor(TextField);
+        tick_button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                String name = TextField.getText();
+                System.out.println(name);
+                TextField.setText(name);
+                TextField.setDisabled(true);
+            }
+        });
+//        String name = TextField.getText();
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -200,13 +199,14 @@ public class new_game implements Screen {
         game.batch.draw(name,nameRect.x+50,nameRect.y-130,nameRect.width,nameRect.height);
         game.batch.draw(selectanks,selectanksRect.x+50,selectanksRect.y-30,selectanksRect.width,selectanksRect.height);
         game.batch.draw(logo,logo_rect.x,logo_rect.y,logo_rect.width,logo_rect.height);
-        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
-        game.batch.draw(nextButton, nextButtonRect.x, nextButtonRect.y, nextButtonRect.width, nextButtonRect.height);
+//        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
+//        game.batch.draw(nextButton, nextButtonRect.x, nextButtonRect.y, nextButtonRect.width, nextButtonRect.height);
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
 
 
+//        return 0;
     }
 
     @Override

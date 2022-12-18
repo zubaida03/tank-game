@@ -12,6 +12,7 @@ public class new_game_tank_confirm implements Screen {
     @Override
     public void render(float delta) {
 
+//        return 0;
     }
 
     @Override

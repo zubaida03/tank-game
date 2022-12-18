@@ -142,6 +142,7 @@ public class MainMenu implements Screen {
 //            game.setScreen(new GameScreen(game));
 //            dispose();
 //        }
+//        return 0;
     }
 
     @Override

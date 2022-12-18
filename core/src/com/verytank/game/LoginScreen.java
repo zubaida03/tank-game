@@ -107,6 +107,7 @@ public class LoginScreen implements Screen {
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
 
+//        return 0;
     }
 
     @Override

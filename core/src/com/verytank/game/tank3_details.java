@@ -38,6 +38,9 @@ public class tank3_details implements Screen {
     private Stage stage;
     private Texture backButton;
     private Rectangle backButtonRect;
+    private TextureRegion back;
+    private TextureRegionDrawable back_drawable;
+    private ImageButton back_button;
     public tank3_details (Very_Tank game) {
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -52,6 +55,9 @@ public class tank3_details implements Screen {
         confirm_drawable = new TextureRegionDrawable(confirm);
         backButton = new Texture("back_button.png");
         backButtonRect = new Rectangle(80, 800, 100, 100);
+        back = new TextureRegion(backButton);
+        back_drawable = new TextureRegionDrawable(back);
+        back_button = new ImageButton(back_drawable);
     }
 
     @Override
@@ -60,9 +66,18 @@ public class tank3_details implements Screen {
         confirm_button = new ImageButton(confirm_drawable);
         confirm_button.setSize(200, 100);
         confirm_button.setPosition(300, 300);
+        back_button.setSize(100, 100);
+        back_button.setPosition(80, 800);
+        stage.addActor(back_button);
         stage.addActor(confirm_button);
         Gdx.input.setInputProcessor(stage);
         confirm_button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new currgame(game));
+            }
+        });
+        back_button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new new_game(game));
@@ -100,6 +115,7 @@ public class tank3_details implements Screen {
         game.batch.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+//        return 0;
     }
 
     @Override

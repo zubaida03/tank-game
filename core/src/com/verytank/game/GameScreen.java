@@ -96,22 +96,19 @@ public class GameScreen implements Screen {
 
         game.batch.draw(vsImage,vsBounds.x,vsBounds.y,vsBounds.width,vsBounds.height);
 
-
         //sprite.draw(game.batch);
         game.batch.end();
+//        return 0;
     }
     public void resize(int width, int height) {
 
     }
-
     @Override
     public void show() {
 
     }
-
     @Override
     public void pause() {
-
     }
 
     @Override

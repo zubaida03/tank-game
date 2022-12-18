@@ -128,6 +128,7 @@ public class actuallogin implements Screen {
         stage.act(Gdx.graphics.getDeltaTime()); //Perform ui logic
         stage.draw();
 
+//        return 0;
     }
 
     @Override

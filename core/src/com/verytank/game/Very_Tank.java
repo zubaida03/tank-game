@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
+//import com.badlogic.gdx.physics.box2d.*;
 
 public class Very_Tank extends Game {
 	SpriteBatch batch;
@@ -28,7 +29,7 @@ public class Very_Tank extends Game {
 
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen(new GameScreen(this));
+		setScreen((Screen) new testing(this));
 	}
 
 
