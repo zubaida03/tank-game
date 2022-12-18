@@ -51,29 +51,29 @@ public class GameScreen implements Screen {
         backgroundImage = new Texture(Gdx.files.internal("game_background.png"));
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         groundImage=new Texture(Gdx.files.internal("ground.png"));
-        groundBounds=new Rectangle(-10,-40,Gdx.graphics.getWidth()+30,Gdx.graphics.getHeight()-700);
+        groundBounds=new Rectangle(-10,-40,(int)(Gdx.graphics.getWidth()+0.027*(Gdx.graphics.getWidth())),(int)(Gdx.graphics.getHeight()-0.634*(Gdx.graphics.getHeight())));
 
         playerBadgeImage1=new Texture(Gdx.files.internal("playerBadge.png"));
-        playerBadgeBounds1 =new Rectangle(350+12, Gdx.graphics.getHeight()-130, 130,130);
+        playerBadgeBounds1 =new Rectangle((int)(0.188*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.12*Gdx.graphics.getHeight()), (int)(0.067*Gdx.graphics.getWidth()),(int)(0.12*Gdx.graphics.getHeight()));
 
         playerBadgeImage2=new Texture(Gdx.files.internal("playerBadge.png"));
-        playerBadgeBounds2 =new Rectangle(Gdx.graphics.getWidth()-350-130+40, Gdx.graphics.getHeight()-130, 130,130);
+        playerBadgeBounds2 =new Rectangle((int)(Gdx.graphics.getWidth()-0.229*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.12*Gdx.graphics.getHeight()), (int)(0.067*Gdx.graphics.getWidth()),(int)(0.12*Gdx.graphics.getHeight()));
 
         healthImage1=new Texture(Gdx.files.internal("health.png"));
-        healthBounds1=new Rectangle(350+100+6, Gdx.graphics.getHeight()-95, 400,61);
+        healthBounds1=new Rectangle((int)(0.2375*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.084*Gdx.graphics.getHeight()), (int)(0.208*Gdx.graphics.getWidth()),(int)(0.056*Gdx.graphics.getHeight()));
 
         healthImage2=new Texture(Gdx.files.internal("health.png"));
-        healthBounds2=new Rectangle(Gdx.graphics.getWidth()-350-100-400-30+50, Gdx.graphics.getHeight()-95, 400,61);
+        healthBounds2=new Rectangle((int)(Gdx.graphics.getWidth()-0.4375*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.084*Gdx.graphics.getHeight()), (int)(0.208*Gdx.graphics.getWidth()),(int)(0.056*Gdx.graphics.getHeight()));
 
         health2Image1=new Texture(Gdx.files.internal("health2.png"));
-        health2Bounds1=new Rectangle(350+100+6+5, Gdx.graphics.getHeight()-91, 390,53);
+        health2Bounds1=new Rectangle((int)(0.2401*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.08*Gdx.graphics.getHeight()), (int)(0.203125*Gdx.graphics.getWidth()),(int)(0.04907*Gdx.graphics.getHeight()));
 
         health2Image2=new Texture(Gdx.files.internal("health2.png"));
-        health2Bounds2=new Rectangle(Gdx.graphics.getWidth()-350-100-400-30+50+5, Gdx.graphics.getHeight()-91, 390,53);
+        health2Bounds2=new Rectangle((int)(Gdx.graphics.getWidth()-0.435*(Gdx.graphics.getWidth())), (int)(Gdx.graphics.getHeight()-0.08*Gdx.graphics.getHeight()), (int)(0.203125*Gdx.graphics.getWidth()),(int)(0.04907*Gdx.graphics.getHeight()));
 
 
         vsImage =new Texture("vs.png");
-        vsBounds=new Rectangle(456+65+400+3,Gdx.graphics.getHeight()-125, 100,100 );
+        vsBounds=new Rectangle((int)(0.48125*(Gdx.graphics.getWidth())),(int)(Gdx.graphics.getHeight()-0.1157*Gdx.graphics.getHeight()), (int)(0.0520*Gdx.graphics.getWidth()),(int)(0.0925*Gdx.graphics.getHeight()));
 
         System.out.println(Gdx.graphics.getHeight());
         System.out.println(Gdx.graphics.getWidth());
