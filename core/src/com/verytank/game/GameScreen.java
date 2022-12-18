@@ -51,7 +51,7 @@ public class GameScreen implements Screen {
         backgroundImage = new Texture(Gdx.files.internal("game_background.png"));
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         groundImage=new Texture(Gdx.files.internal("ground.png"));
-        groundBounds=new Rectangle(-10,-40,Gdx.graphics.getWidth()+40,Gdx.graphics.getHeight()+40);
+        groundBounds=new Rectangle(-10,-40,Gdx.graphics.getWidth()+30,Gdx.graphics.getHeight()-700);
 
         playerBadgeImage1=new Texture(Gdx.files.internal("playerBadge.png"));
         playerBadgeBounds1 =new Rectangle(350+12, Gdx.graphics.getHeight()-130, 130,130);
@@ -75,8 +75,8 @@ public class GameScreen implements Screen {
         vsImage =new Texture("vs.png");
         vsBounds=new Rectangle(456+65+400+3,Gdx.graphics.getHeight()-125, 100,100 );
 
-        //System.out.println(Gdx.graphics.getHeight());
-        //System.out.println(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
+        System.out.println(Gdx.graphics.getWidth());
     }
 
 
