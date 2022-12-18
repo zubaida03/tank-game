@@ -96,7 +96,6 @@ public class GameScreen implements Screen {
 
         game.batch.draw(vsImage,vsBounds.x,vsBounds.y,vsBounds.width,vsBounds.height);
 
-
         //sprite.draw(game.batch);
         game.batch.end();
     }

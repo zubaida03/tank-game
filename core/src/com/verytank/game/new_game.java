@@ -1,6 +1,7 @@
 package com.verytank.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -64,6 +65,10 @@ public class new_game implements Screen {
     private Rectangle backButtonRect;
     private Texture nextButton;
     private Rectangle nextButtonRect;
+    private Texture tick;
+    private TextureRegion tick_img;
+    private TextureRegionDrawable tick_drawable;
+    private ImageButton tick_button;
     public new_game(Very_Tank game){
         this.game = game;
         background = new Texture("tank-stars-banner.jpg");
@@ -90,7 +95,12 @@ public class new_game implements Screen {
         backButtonRect = new Rectangle(80, 800, 100, 100);
         nextButton = new Texture("next_button.png");
         nextButtonRect = new Rectangle(Gdx.graphics.getWidth()-200, 800, 100, 100);
-        
+        tick = new Texture("tick.png");
+        tick_img = new TextureRegion(tick);
+        tick_drawable = new TextureRegionDrawable(tick_img);
+
+
+
 
     }
 
@@ -108,6 +118,9 @@ public class new_game implements Screen {
         confirm_button = new ImageButton(confirm_drawable);
         confirm_button.setSize(200, 100);
         confirm_button.setPosition(300, 300);
+        tick_button = new ImageButton(tick_drawable);
+        tick_button.setSize(40, 40);
+        tick_button.setPosition(1060, 590);
         stage = new Stage(new ScreenViewport());
         mSkin = new Skin(Gdx.files.internal("uiskin.json"));
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
@@ -115,6 +128,7 @@ public class new_game implements Screen {
         stage.addActor(tank1_button);
         stage.addActor(tank2_button);
         stage.addActor(tank3_button);
+        stage.addActor(tick_button);
 //        stage.addActor(confirm_but/**/ton);
         tank1_button.addListener(new ClickListener() {
             @Override
@@ -166,6 +180,16 @@ public class new_game implements Screen {
         TextField.setColor(0.2f, 0.2f, 0.7f, 0.9f);
         TextField.setPosition(Gdx.graphics.getWidth()/2-TextField.getWidth()/2 -10, Gdx.graphics.getHeight()/2+50);
         stage.addActor(TextField);
+        tick_button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                String name = TextField.getText();
+                System.out.println(name);
+                TextField.setText(name);
+                TextField.setDisabled(true);
+            }
+        });
+        String name = TextField.getText();
 
         Gdx.input.setInputProcessor(stage);
     }
