@@ -11,8 +11,8 @@ public class tank {
     private int maxspeed;
     private int currHealth;
     private int currFuel;
-    private int currX;
-    private int currY;
+    private float currX;
+    private float currY;
     private Rectangle tank;
     private Texture texture;
 
@@ -56,16 +56,21 @@ public class tank {
     public void setCurrFuel(int currFuel) {
         this.currFuel = currFuel;
     }
-    public int getCurrX() {
+    public float getCurrX() {
         return currX;
     }
-    public void setCurrX(int currX) {
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setCurrX(float currX) {
         this.currX = currX;
     }
-    public int getCurrY() {
+    public float getCurrY() {
         return currY;
     }
-    public void setCurrY(int currY) {
+    public void setCurrY(float currY) {
         this.currY = currY;
     }
     public Texture getTank() {
@@ -74,7 +79,7 @@ public class tank {
     public void setTank(Texture tank) {
         this.texture = tank;
     }
-    public tank(int currX, int currY, int currHealth, int currFuel, int speed, int maxHealth, int maxspeed,String name,Texture texture) {
+    public tank(float currX, float currY, int currHealth, int currFuel, int speed, int maxHealth, int maxspeed,String name,Texture texture) {
         setCurrY(currY);
         setCurrX(currX);
         setCurrHealth(currHealth);
@@ -98,4 +103,3 @@ public class tank {
     }
 
 }
-

@@ -9,9 +9,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 import java.awt.*;
 
@@ -42,12 +48,28 @@ public class currgame extends ApplicationAdapter implements Screen {
     private Body weapon1Body;
     private Texture groundImage;
     private Body groundBody;
+    private Stage stage;
+    private TextureRegion pause;
+    private TextureRegionDrawable pausedrawable;
+    private ImageButton pausebutton;
 
     private int a = 0;
     private Body testWeapon;
     private float VIRTUAL_HEIGHT = 10f;
+    private Texture turn_g;
+    private Texture turn_r;
+    private int turn = 0;
+    public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height, Stage stage){
+        region = new TextureRegion(new Texture(address));
+        drawable = new TextureRegionDrawable(region);
+        button = new ImageButton(drawable);
+        button.setPosition(x, y);
+        button.setSize(width, height);
+        stage.addActor(button);
+        return button;
+    }
 
-    public currgame(Very_Tank game, tank player1_tank, tank player2_tank) {
+    public currgame(final Very_Tank game, tank player1_tank, tank player2_tank) {
         this.player1_tank = player1_tank;
         this.player2_tank = player2_tank;
         this.game = game;
@@ -72,6 +94,8 @@ public class currgame extends ApplicationAdapter implements Screen {
         tank1 = new Texture("tank1_img.png");
         tank2 = new Texture("tan2_img_inverted.png");
         w_1 = new Texture("spritesheet.png");
+        turn_g = new Texture("turn_g.png");
+        turn_r = new Texture("turn_r.png");
 
 //        w_1 = new Texture("w1.jpeg");
 //        sprite = new Sprite(w_1,180,460,100,100);
@@ -79,7 +103,9 @@ public class currgame extends ApplicationAdapter implements Screen {
         weapon1Rect = new Rectangle(180, 460, 100, 100);
         tank1Rect = new Rectangle(100, 322, 300, 200);
         tank2Rect = new Rectangle(1000, 318, 300, 200);
-        weapon1 = new weapon(100, 100, 100, 100, weapon1Rect);
+        weapon1 = new weapon(100, 100, 100, 100, weapon1Rect,w_1);
+        stage = new Stage();
+        pausebutton = buttonmaker("pausebutton.png", pause, pausedrawable, pausebutton, 70, Gdx.graphics.getHeight()-150, 70, 70,stage);
 //        player1_tank = new tank(100, 100, 100, 100, 100, 100, 100, tank1Rect, "player1");
 //        player2_tank = new tank(1000, 100, 100, 100, 100, 100, 100, tank2Rect, "player2");
         player1Body = createplayerdynamic(100, 330, player1Body);
@@ -89,6 +115,8 @@ public class currgame extends ApplicationAdapter implements Screen {
         player2Body.setGravityScale(0);
         player1Body.setGravityScale(0);
         weapon1Body.setGravityScale(0);
+        stage.addActor(pausebutton);
+        Gdx.input.setInputProcessor(stage);
 //        weapon1Body.setLinearVelocity(5f,5f);
 //        player1Body.applyLinearImpulse(100.0f, 0.0f, player1_tank.getCurrX(), , true);
 //        player2Body.applyLinearImpulse(-100.0f, 0.0f, 0.0f, 0.0f, true);
@@ -105,7 +133,13 @@ public class currgame extends ApplicationAdapter implements Screen {
         world.createJoint(player2fric);
 
 
-        testWeapon = shoot(player1_tank, weapon1, 60);
+        testWeapon = shoot(player1_tank, player1Body.getPosition().x+250, player1Body.getPosition().y+200, weapon1, 200,60);
+        pausebutton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new pausemenu(game));
+            }
+        });
 
     }
 
@@ -153,7 +187,7 @@ public class currgame extends ApplicationAdapter implements Screen {
 
 
     Vector2 getTrajectoryPoint(Vector2 startingPosition, Vector2 startingVelocity, float n) {
-        //velocity and gravity are given per second but we want time step values here
+//        velocity and gravity are given per second but we want time step values here
         float t = 1 / 60.0f; // seconds per time step (at 60fps)
         Vector2 stepVelocity = startingVelocity.scl(t, t); // m/s
         Vector2 stepGravity = world.getGravity().scl(t * t, t * t); // m/s/s
@@ -161,19 +195,19 @@ public class currgame extends ApplicationAdapter implements Screen {
         return startingPosition.add(stepVelocity.scl(n).add(stepGravity.scl(0.5f * (n * n + n))));
     }
 
-    public Body shoot(tank tank, weapon weapon, float angle) {
-        float weaponX = tank.getCurrX();
-        float weaponY = tank.getCurrY();
+    public Body shoot(tank tank,float weaponX,float weaponY, weapon weapon, float speed, float angle) {
+        //float weaponX = tank.getCurrX();
+        //float weaponY = tank.getCurrY();
         weapon.setXcurr(weaponX);
         weapon.setYcurr(weaponY);
         BodyDef weaponDef = new BodyDef();
-        weaponDef.bullet = true;
+//        weaponDef.bullet = true;
         weaponDef.type = BodyDef.BodyType.DynamicBody;
         weaponDef.position.set(weaponX, weaponY);
         Body weaponBody = world.createBody(weaponDef);
         weaponBody.setTransform(weaponBody.getPosition().x, weaponBody.getPosition().y, angle);
         PolygonShape weaponShape = new PolygonShape();
-        weaponShape.setAsBox(w_1.getWidth()*(1 / 100), w_1.getHeight()*(1 / 100));
+        weaponShape.setAsBox(weapon.getTexture().getWidth()/2, weapon.getTexture().getHeight()/2);
 //        weaponBody.setGravityScale(9.8f);
         FixtureDef weaponFixture = new FixtureDef();
 
@@ -193,7 +227,8 @@ public class currgame extends ApplicationAdapter implements Screen {
         //Vector2 startingVelocity =new Vector2(1000,1000);
         //startingVelocity.rotateDeg((float) angle - 45);
         //weaponBody.setLinearVelocity(startingVelocity);
-        weaponBody.setLinearVelocity(15 * xycomp.x, 15 * xycomp.y);
+
+        weaponBody.setLinearVelocity(speed * xycomp.x, speed * xycomp.y);
         weaponBody.setAwake(true);
 
 
@@ -226,7 +261,9 @@ public class currgame extends ApplicationAdapter implements Screen {
 
 
     }
-
+    public void missile_fired(int x){
+        this.turn = x;
+    }
     @Override
     public void render(float delta) {
 //        player1.show();
@@ -236,14 +273,14 @@ public class currgame extends ApplicationAdapter implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         background.render(delta);
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1Body.getPosition().x > 0)
-            player1Body.setTransform(player1Body.getPosition().x - 5, player1Body.getPosition().y, 0);
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1Body.getPosition().x < Gdx.graphics.getWidth() - 300)
-            player1Body.setTransform(player1Body.getPosition().x + 5, player1Body.getPosition().y, 0);
-        if (Gdx.input.isKeyPressed(Input.Keys.A) && player2Body.getPosition().x > 0)
-            player2Body.setTransform(player2Body.getPosition().x - 5, player2Body.getPosition().y, 0);
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && player2Body.getPosition().x < Gdx.graphics.getWidth() - 300)
-            player2Body.setTransform(player2Body.getPosition().x + 5, player2Body.getPosition().y, 0);
+//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && player1Body.getPosition().x > 0)
+//            player1Body.setTransform(player1Body.getPosition().x - 5, player1Body.getPosition().y, 0);
+//        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player1Body.getPosition().x < Gdx.graphics.getWidth() - 300)
+//            player1Body.setTransform(player1Body.getPosition().x + 5, player1Body.getPosition().y, 0);
+//        if (Gdx.input.isKeyPressed(Input.Keys.A) && player2Body.getPosition().x > 0)
+//            player2Body.setTransform(player2Body.getPosition().x - 5, player2Body.getPosition().y, 0);
+//        if (Gdx.input.isKeyPressed(Input.Keys.D) && player2Body.getPosition().x < Gdx.graphics.getWidth() - 300)
+//            player2Body.setTransform(player2Body.getPosition().x + 5, player2Body.getPosition().y, 0);
         debugRenderer.render(world, camera.combined);
         world.step(1 / 60f, 6, 2);
         game.batch.begin();
@@ -253,8 +290,37 @@ public class currgame extends ApplicationAdapter implements Screen {
         Vector2 xycomp = getSpeed(angle);
         for (int i = 0; i < 1920; i++) {
             Vector2 traj = getTrajectoryPoint(new Vector2(0, 0), new Vector2(20 * xycomp.x, 20 * xycomp.y), i);
-            game.batch.draw(w_1, traj.x, traj.y, player1_tank.getCurrX(), player1_tank.getCurrY(), 50, 50);
+            game.batch.draw(w_1, traj.x, traj.y, (int)player1_tank.getCurrX(),(int)player1_tank.getCurrY(), 50, 50);
         }
+        game.batch.end();
+        if (turn==0) {
+            game.batch.begin();
+            game.batch.draw(turn_g, 200, Gdx.graphics.getHeight()-100, 40, 40);
+            game.batch.draw(turn_r, Gdx.graphics.getWidth()-200, Gdx.graphics.getHeight()-70, 40, 40);
+            game.batch.end();
+//
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && tank1Rect.x > 0)
+                player1Body.setTransform(player1Body.getPosition().x - 5, player1Body.getPosition().y, 0);
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && tank1Rect.x < Gdx.graphics.getWidth() - 300)
+                player1Body.setTransform(player1Body.getPosition().x + 5, player1Body.getPosition().y, 0);
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+                missile_fired(1);
+            }
+        }
+        else {
+            game.batch.begin();
+            game.batch.draw(turn_g, Gdx.graphics.getWidth()-200, Gdx.graphics.getHeight()-70, 40, 40);
+            game.batch.draw(turn_r, 200, Gdx.graphics.getHeight()-100, 40, 40);
+            game.batch.end();
+            if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && tank2Rect.x > 0)
+                player2Body.setTransform(player2Body.getPosition().x - 5, player2Body.getPosition().y, 0);
+            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && tank2Rect.x < Gdx.graphics.getWidth() - 300)
+                player2Body.setTransform(player2Body.getPosition().x + 5, player2Body.getPosition().y, 0);
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+                missile_fired(0);
+            }
+        }
+        game.batch.begin();
         game.batch.draw(player1_tank.getTank(), player1Body.getPosition().x, player1Body.getPosition().y, 300, 200);
         game.batch.draw(player2_tank.getTank(), player2Body.getPosition().x, player2Body.getPosition().y, 300, 200);
         game.batch.draw(w_1, player1Body.getPosition().x, player1Body.getPosition().y, 1f, 1f);
@@ -262,6 +328,8 @@ public class currgame extends ApplicationAdapter implements Screen {
 //        testWeapon.getPosition().y=player1Body.getPosition().y;
         game.batch.draw(w_1, testWeapon.getPosition().x, testWeapon.getPosition().y, 0, 0, 1f, 1f, 50f, 50f, testWeapon.getAngle(), 0, 0, w_1.getTextureData().getWidth(), w_1.getTextureData().getHeight(), false, false);
         game.batch.end();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
     }
 
     private void update(float deltaTime) {
