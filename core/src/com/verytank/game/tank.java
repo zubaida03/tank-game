@@ -1,17 +1,20 @@
 package com.verytank.game;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import java.awt.*;
 
 public class tank {
     private String name;
     private int speed;
     private int maxHealth;
-    private int maxFuel;
+    private int maxspeed;
     private int currHealth;
     private int currFuel;
     private int currX;
     private int currY;
     private Rectangle tank;
+    private Texture texture;
 
     public String getName() {
         return name;
@@ -35,11 +38,11 @@ public class tank {
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
-    public int getMaxFuel() {
-        return maxFuel;
+    public int getMaxspeed() {
+        return maxspeed;
     }
-    public void setMaxFuel(int maxFuel) {
-        this.maxFuel = maxFuel;
+    public void setMaxspeed(int maxFuel) {
+        this.maxspeed = maxFuel;
     }
     public int getCurrHealth() {
         return currHealth;
@@ -65,15 +68,33 @@ public class tank {
     public void setCurrY(int currY) {
         this.currY = currY;
     }
-    public tank(int currX, int currY, int currHealth, int currFuel, int speed, int maxHealth, int maxFuel,Rectangle tank, String name) {
+    public Texture getTank() {
+        return texture;
+    }
+    public void setTank(Texture tank) {
+        this.texture = tank;
+    }
+    public tank(int currX, int currY, int currHealth, int currFuel, int speed, int maxHealth, int maxspeed,String name,Texture texture) {
         setCurrY(currY);
         setCurrX(currX);
         setCurrHealth(currHealth);
         setCurrFuel(currFuel);
         setSpeed(speed);
         setMaxHealth(maxHealth);
-        setMaxFuel(maxFuel);
+        setMaxspeed(maxspeed);
         setName(name);
+        setTank(texture);
+    }
+
+    public void printshit() {
+        System.out.println("name: " + name);
+        System.out.println("speed: " + speed);
+        System.out.println("maxHealth: " + maxHealth);
+        System.out.println("maxspeed: " + maxspeed);
+        System.out.println("currHealth: " + currHealth);
+        System.out.println("currFuel: " + currFuel);
+        System.out.println("currX: " + currX);
+        System.out.println("currY: " + currY);
     }
 
 }

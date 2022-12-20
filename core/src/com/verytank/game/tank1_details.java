@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import java.awt.*;
 
 public class tank1_details implements Screen {
-    private tank player1;
 //    background
     private Texture textu;
     private Rectangle textuRect;
@@ -48,8 +47,12 @@ public class tank1_details implements Screen {
     private TextureRegion back;
     private TextureRegionDrawable back_drawable;
     private ImageButton back_button;
-    public tank1_details (Very_Tank game) {
+    private new_game_tank_confirm new_game_tank_confirm;
+    private String tank1_name;
+    private Boolean playerwho;
+    public tank1_details (Very_Tank game,new_game_tank_confirm new_game_tank_confirm,String name) {
         this.game = game;
+        this.tank1_name = name;
         background = new Texture("tank-stars-banner.jpg");
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         tank = new Texture("t2.png");
@@ -69,6 +72,7 @@ public class tank1_details implements Screen {
         back = new TextureRegion(backButton);
         back_drawable = new TextureRegionDrawable(back);
         back_button = new ImageButton(back_drawable);
+        this.new_game_tank_confirm = new_game_tank_confirm;
     }
 
     @Override
@@ -86,7 +90,15 @@ public class tank1_details implements Screen {
         confirm_button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new new_game(game));
+                System.out.println(new_game_tank_confirm.isPlayerwho());
+                if (new_game_tank_confirm.isPlayerwho()){
+                    new_game_tank_confirm.setPlayer2_tank(new tank(1000, 100, 80, 100, 50, 80, 50,tank1_name ,new Texture("tank1_img_inverted.png")));
+                    game.setScreen(new currgame(game,new_game_tank_confirm.getPlayer1_tank(),new_game_tank_confirm.getPlayer2_tank()));
+                }
+                else {
+                    new_game_tank_confirm.setPlayer1_tank(new tank(100, 100, 80, 100, 50, 80, 50, tank1_name,new Texture("tank1_img.png")));
+                    game.setScreen(new new_game_2(game,new_game_tank_confirm));
+                }
 
             }
         });

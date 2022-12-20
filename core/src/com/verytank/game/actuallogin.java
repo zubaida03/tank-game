@@ -88,7 +88,7 @@ public class actuallogin implements Screen {
         newbutton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new new_game(game));
+                game.setScreen(new new_game_tank_confirm(game));
             }
         });
 
