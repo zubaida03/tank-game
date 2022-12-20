@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
     private Texture pauseImage;
     private Rectangle pauseBounds;
 
-
+    OrthographicCameraExample cam=new OrthographicCameraExample();
 
     public GameScreen(final Very_Tank game){
         batch= new SpriteBatch();
@@ -77,6 +77,7 @@ public class GameScreen implements Screen {
 
         System.out.println(Gdx.graphics.getHeight());
         System.out.println(Gdx.graphics.getWidth());
+        cam.create();
     }
 
 
@@ -84,8 +85,11 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.enableBlending();
+        cam.render();
         game.batch.begin();
-        game.batch.draw(backgroundImage,backgroundBounds.x,backgroundBounds.y,backgroundBounds.width,backgroundBounds.height);
+
+
+//        game.batch.draw(backgroundImage,backgroundBounds.x,backgroundBounds.y,backgroundBounds.width,backgroundBounds.height);
         game.batch.draw(groundImage,groundBounds.x,groundBounds.y,groundBounds.width,groundBounds.height);
         game.batch.draw(playerBadgeImage1,playerBadgeBounds1.x,playerBadgeBounds1.y,playerBadgeBounds1.width,playerBadgeBounds1.height);
         game.batch.draw(playerBadgeImage2,playerBadgeBounds2.x,playerBadgeBounds2.y,playerBadgeBounds2.width,playerBadgeBounds2.height);
