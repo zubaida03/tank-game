@@ -53,6 +53,7 @@ public class new_game implements Screen {
     private ImageButton tank2_button;
     private Stage stage;
     private TextField TextField;
+    private new_game_tank_confirm details_receiver;
     private Skin mSkin;
     private TextureAtlas atlas;
     private TextureRegion confirm;
@@ -91,6 +92,7 @@ public class new_game implements Screen {
         logo = new Texture("download-removebg-preview.png");
         logo_rect = new Rectangle(650, 600, 600, 600);
         tan1_img = new Texture("tank1_img.png");
+        new_game_tank_confirm details_receiver = new new_game_tank_confirm(game);
     }
 
     @Override

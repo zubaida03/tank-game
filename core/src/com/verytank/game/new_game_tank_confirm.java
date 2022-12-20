@@ -3,6 +3,14 @@ package com.verytank.game;
 import com.badlogic.gdx.Screen;
 
 public class new_game_tank_confirm implements Screen {
+    private Very_Tank game;
+    private new_game selection;
+    private String player1_name;
+    private String player2_name;
+
+    public new_game_tank_confirm(Very_Tank game) {
+        this.game = game;
+    }
 
     @Override
     public void show() {
@@ -11,8 +19,7 @@ public class new_game_tank_confirm implements Screen {
 
     @Override
     public void render(float delta) {
-
-//        return 0;
+        game.setScreen(new new_game(game));
     }
 
     @Override

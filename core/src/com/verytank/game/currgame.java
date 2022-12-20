@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
 
 import java.awt.*;
 
@@ -40,6 +41,7 @@ public class currgame extends ApplicationAdapter implements Screen  {
     private Body player2Body;
     private Body weapon1Body;
     private Texture groundImage;
+    private Body groundBody;
 
     private int a = 0;
     public currgame(Very_Tank game){
@@ -63,22 +65,49 @@ public class currgame extends ApplicationAdapter implements Screen  {
         weapon1 = new weapon(100,100,100,100,weapon1Rect);
         player1_tank = new tank(100, 100, 100, 100, 100, 100, 100,tank1Rect, "player1");
         player2_tank = new tank(1000, 100, 100, 100, 100, 100, 100,tank2Rect,  "player2");
-        player1Body = createplayerdynamic(100,322,player1Body);
-        player2Body = createplayerdynamic(1000,318,player2Body);
-        weapon1Body = createplayerdynamic(180,460,weapon1Body);
+        player1Body = createplayerdynamic(100,335,player1Body);
+        player2Body = createplayerdynamic(1000,332,player2Body);
+        weapon1Body = createPlayerkinematic(180,460,weapon1Body);
+        groundBody = createPlayerStatic(-10,-40,groundBody,(int)(Gdx.graphics.getWidth()+0.027*(Gdx.graphics.getWidth())),(int)(Gdx.graphics.getHeight()-0.634*(Gdx.graphics.getHeight())-120));
         player2Body.setGravityScale(0);
         player1Body.setGravityScale(0);
         weapon1Body.setGravityScale(0);
+//        weapon1Body.setLinearVelocity(5f,5f);
+//        player1Body.applyLinearImpulse(100.0f, 0.0f, player1_tank.getCurrX(), , true);
+//        player2Body.applyLinearImpulse(-100.0f, 0.0f, 0.0f, 0.0f, true);
+//        player1Body.setLinearVelocity(500f,0f);
+//        player2Body.setLinearVelocity(-500f,0f);
+//        friction joint
+        FrictionJointDef jointDef = new FrictionJointDef();
+        FrictionJointDef player2fric = new FrictionJointDef();
+        player2fric.maxForce = 10f;
+        jointDef.maxForce = 10f;
+        jointDef.initialize(player1Body, groundBody, player1Body.getWorldCenter());
+        player2fric.initialize(player2Body, groundBody, player2Body.getWorldCenter());
+        world.createJoint(jointDef);
+        world.createJoint(player2fric);
+
     }
-    private Body createPlayerstatic(float x, float y, Body body){
+    private Body createPlayerStatic(float x, float y, Body body,int width,int height) {
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(x, y);
         body = world.createBody(bodyDef);
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(300, 200);
+        shape.setAsBox(width, height);
         body.createFixture(shape, 0.0f);
         shape.dispose();
+        return body;
+    }
+    private Body createPlayerkinematic(float x, float y, Body body){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.position.set(x, y);
+        body = world.createBody(bodyDef);
+//        PolygonShape shape = new PolygonShape();
+//        shape.setAsBox(10, 10);
+//        body.createFixture(shape, 0.0f);
+//        shape.dispose();
         return body;
     }
     private Body createplayerdynamic(int a,int b,Body body) {
@@ -87,10 +116,10 @@ public class currgame extends ApplicationAdapter implements Screen  {
         def.position.set(a,b);
         def.fixedRotation = true;
 //        body.setUserData(tank1);
-        FixtureDef fd = new FixtureDef();
-        fd.density = 1;
-        fd.friction = 0.5f;
-        fd.restitution = 0.3f;
+//        FixtureDef fd = new FixtureDef();
+//        fd.density = 1;
+//        fd.friction = 0.5f;
+//        fd.restitution = 0.3f;
         body = world.createBody(def);
         return body;
     }

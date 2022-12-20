@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -22,6 +23,7 @@ public class Very_Tank extends Game {
 	Texture img;
 	BitmapFont font;
 	ShapeRenderer shapeRenderer;
+	Stage stage;
 	
 	@Override
 	public void create () {
@@ -29,7 +31,7 @@ public class Very_Tank extends Game {
 
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen((Screen) new testing(this));
+		setScreen((Screen) new new_game_tank_confirm(this));
 	}
 
 
