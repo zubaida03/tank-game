@@ -12,23 +12,25 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
+//import com.badlogic.gdx.physics.box2d.*;
 
 public class Very_Tank extends Game {
 	SpriteBatch batch;
 	Texture img;
 	BitmapFont font;
 	ShapeRenderer shapeRenderer;
-	
+	Stage stage;
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen(new actuallogin(this));
+		setScreen((Screen) new LoginScreen(this));
 	}
 
 

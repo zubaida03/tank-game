@@ -21,7 +21,7 @@ import  com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 import java.awt.*;
 
-public class new_game implements Screen {
+public class new_game_2 implements Screen {
     private Texture tan1_img;
     private Texture tan2_img;
     private Texture tan3_img;
@@ -53,7 +53,7 @@ public class new_game implements Screen {
     private ImageButton tank2_button;
     private Stage stage;
     private TextField TextField;
-    private new_game_tank_confirm details_receiver = new new_game_tank_confirm(game);
+    private new_game_tank_confirm details_receiver;
     private Skin mSkin;
     private TextureAtlas atlas;
     private TextureRegion confirm;
@@ -72,8 +72,7 @@ public class new_game implements Screen {
     private TextureRegion tick_img;
     private TextureRegionDrawable tick_drawable;
     private ImageButton tick_button;
-
-    public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height) {
+    public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height){
         region = new TextureRegion(new Texture(address));
         drawable = new TextureRegionDrawable(region);
         button = new ImageButton(drawable);
@@ -83,12 +82,12 @@ public class new_game implements Screen {
         return button;
     }
 
-    public new_game(Very_Tank game) {
+    public new_game_2(Very_Tank game, new_game_tank_confirm details_receiver) {
         this.game = game;
-//        this.details_receiver = details_receiver;
+        this.details_receiver = details_receiver;
         background = new Texture("tank-stars-banner.jpg");
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        name = new Texture("name.png");
+        name = new Texture("player2.png");
         nameRect = new Rectangle(800, 800, 200, 80);
         selectanks = new Texture("selectanks.png");
         selectanksRect = new Rectangle(800, 450, 200, 80);
@@ -104,72 +103,66 @@ public class new_game implements Screen {
         mSkin = new Skin(Gdx.files.internal("uiskin.json"));
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("uiskin.atlas"));
         mSkin.addRegions(atlas);
-        tank1_button = buttonmaker("tank1_img.png", tank1_region, tank1_drawable, tank1_button, 400, 100, 300, 300);
-        tank2_button = buttonmaker("tan2_img.png", tank2_region, tank2_drawable, tank2_button, 800, 70, 300, 300);
-        tank3_button = buttonmaker("tan3_img.png", tank3_region, tank3_drawable, tank3_button, 1200, 100, 300, 300);
-        tick_button = buttonmaker("tick.png", tick_img, tick_drawable, tick_button, 1060, 590, 40, 40);
+        tank1_button=buttonmaker("tank1_img.png",tank1_region, tank1_drawable, tank1_button, 400, 100, 300, 300);
+        tank2_button=buttonmaker("tan2_img.png",tank2_region, tank2_drawable, tank2_button, 800, 70, 300, 300);
+        tank3_button=buttonmaker("tan3_img.png",tank3_region, tank3_drawable, tank3_button, 1200, 100, 300, 300);
+        tick_button=buttonmaker("tick.png",tick_img, tick_drawable, tick_button, 1060, 590, 40, 40);
         ImageButton back_button = buttonmaker("back_button.png", button_region, button_drawable, tick_button, 80, 800, 100, 100);
-        next_button = buttonmaker("next_button.png", next_region, next_drawable, next_button, Gdx.graphics.getWidth() - 200, 800, 100, 100);
+        next_button=buttonmaker("next_button.png",next_region, next_drawable, next_button,Gdx.graphics.getWidth()-200, 800, 100, 100);
         tank1_button.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                tank1_button.setSize(400, 400);
+                tank1_button.setSize(400,400);
             }
-
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                tank1_button.setSize(300, 300);
+                tank1_button.setSize(300,300);
             }
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new tank1_details(game, details_receiver, TextField.getText()));
+                game.setScreen(new tank1_details(game,details_receiver, TextField.getText()));
             }
         });
         tank2_button.addListener(new ClickListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                tank2_button.setSize(400, 400);
+                tank2_button.setSize(400,400);
             }
-
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                tank2_button.setSize(300, 300);
+                tank2_button.setSize(300,300);
             }
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new tank2_details(game, details_receiver, TextField.getText()));
+                game.setScreen(new tank2_details(game,details_receiver, TextField.getText()));
             }
         });
         tank3_button.addListener(new ClickListener() {
             @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                tank3_button.setSize(400, 400);
+            public void enter(InputEvent event, float x, float y,int pointer, Actor fromActor) {
+                tank3_button.setSize(400,400);
 //                tank3_button.setPosition(1200, 200);
             }
-
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                tank3_button.setSize(300, 300);
+                tank3_button.setSize(300,300);
 //                tank3_button.setPosition(1200, 200);
             }
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new tank3_details(game, details_receiver, TextField.getText()));
+                game.setScreen(new tank3_details(game,details_receiver, TextField.getText()));
             }
         });
         TextField = new TextField("", mSkin);
         TextField.setMessageText("test");
         TextField.setSize(200, 40);
         TextField.setColor(0.2f, 0.2f, 0.7f, 0.9f);
-        TextField.setPosition(Gdx.graphics.getWidth() / 2 - TextField.getWidth() / 2 - 10, Gdx.graphics.getHeight() / 2 + 50);
+        TextField.setPosition(Gdx.graphics.getWidth()/2-TextField.getWidth()/2 -10, Gdx.graphics.getHeight()/2+50);
         stage.addActor(TextField);
         tick_button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                details_receiver.setPlayer1_name(TextField.getText());
+                details_receiver.setPlayer2_name(TextField.getText());
                 //                System.out.println(name);
                 TextField.setText(TextField.getText());
                 TextField.setDisabled(true);
@@ -187,13 +180,13 @@ public class new_game implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.enableBlending();
         game.batch.begin();
-        game.batch.draw(background, backgroundBounds.x, backgroundBounds.y, backgroundBounds.width, backgroundBounds.height);
+        game.batch.draw(background,backgroundBounds.x,backgroundBounds.y,backgroundBounds.width,backgroundBounds.height);
         game.batch.end();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         game.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        game.shapeRenderer.setColor(new Color(0.1f, 0.4f, 0.6f, 0.9f));
-        game.shapeRenderer.rect(0, 150, Gdx.graphics.getWidth(), 800);
+        game.shapeRenderer.setColor(new Color(0.1f,0.4f,0.6f,0.9f));
+        game.shapeRenderer.rect(0,150,Gdx.graphics.getWidth(), 800);
         game.shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
 //        background done
@@ -207,9 +200,9 @@ public class new_game implements Screen {
         tankOne tank1 = new tankOne();
         tank1.getAnimation();
         game.batch.begin();
-        game.batch.draw(name, nameRect.x + 50, nameRect.y - 130, nameRect.width, nameRect.height);
-        game.batch.draw(selectanks, selectanksRect.x + 50, selectanksRect.y - 30, selectanksRect.width, selectanksRect.height);
-        game.batch.draw(logo, logo_rect.x, logo_rect.y, logo_rect.width, logo_rect.height);
+        game.batch.draw(name,nameRect.x+50,nameRect.y-130,nameRect.width,nameRect.height);
+        game.batch.draw(selectanks,selectanksRect.x+50,selectanksRect.y-30,selectanksRect.width,selectanksRect.height);
+        game.batch.draw(logo,logo_rect.x,logo_rect.y,logo_rect.width,logo_rect.height);
 //        game.batch.draw(backButton, backButtonRect.x, backButtonRect.y, backButtonRect.width, backButtonRect.height);
 //        game.batch.draw(nextButton, nextButtonRect.x, nextButtonRect.y, nextButtonRect.width, nextButtonRect.height);
         game.batch.end();
@@ -252,3 +245,5 @@ public class new_game implements Screen {
         stage.dispose();
     }
 }
+
+

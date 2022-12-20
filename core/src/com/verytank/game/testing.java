@@ -33,8 +33,8 @@ public class testing implements Screen {
         tank2 = new Texture("tan2_img_inverted.png");
         tank1Rect = new Rectangle(100, 322, 300, 200);
         tank2Rect = new Rectangle(1000, 318, 300, 150);
-        player1_tank = new tank(100, 100, 100, 100, 100, 100, 100,tank1Rect, "player1");
-        player2_tank = new tank(1000, 100, 100, 100, 100, 100, 100,tank2Rect,  "player2");
+//        player1_tank = new tank(100, 100, 100, 100, 100, 100, 100, "player1");
+//        player2_tank = new tank(1000, 100, 100, 100, 100, 100, 100,  "player2");
     }
 
     @Override
