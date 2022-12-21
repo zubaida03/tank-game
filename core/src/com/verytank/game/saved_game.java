@@ -38,11 +38,11 @@ public class saved_game {
             System.out.println("saved_game: " + saved.get(i));
         }
     }
-    public static void main(String[]args){
-        saved_game saved_game = new saved_game();
-
-        saved_game.printshit();
-    }
+//    public static void main(String[]args){
+//        saved_game saved_game = new saved_game();
+//
+//        saved_game.printshit();
+//    }
     public void testing(){
         player p1 = new player("p1",new tank(100, 100, 40, 100, 90, 40, 90, "t1", new Texture("tan2_img.png")));
         player p2 = new player("p2",new tank(100, 100, 40, 100, 90, 40, 90, "t2", new Texture("tan2_img.png")));

@@ -29,7 +29,7 @@ import java.awt.*;
 
 import static jdk.jfr.internal.consumer.EventLog.update;
 
-public class currgame extends ApplicationAdapter implements Screen {
+public class gameLoader extends ApplicationAdapter implements Screen {
     private int x =Gdx.graphics.getWidth()/2 ;
     private int y = 150 ;
     private int width = 0;
@@ -59,6 +59,252 @@ public class currgame extends ApplicationAdapter implements Screen {
     private OrthographicCamera camera;
     private Box2DDebugRenderer debugRenderer;
     private Body player1Body;
+    private gameLoader gameNow;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getWidth2() {
+        return width2;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getX2() {
+        return x2;
+    }
+
+    public int getY2() {
+        return y2;
+    }
+
+    public int getHeight2() {
+        return height2;
+    }
+
+    public GameScreen getBackground() {
+        return background;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
+    public new_game getPlayer1() {
+        return player1;
+    }
+
+    public weapon getWeapon1() {
+        return weapon1;
+    }
+
+    public Very_Tank getGame() {
+        return game;
+    }
+
+    public tank getPlayer1_tank() {
+        return player1_tank;
+    }
+
+    public tank getPlayer2_tank() {
+        return player2_tank;
+    }
+
+    public Texture getTank1() {
+        return tank1;
+    }
+
+    public Texture getTank2() {
+        return tank2;
+    }
+
+    public Rectangle getTank1Rect() {
+        return tank1Rect;
+    }
+
+    public Rectangle getTank2Rect() {
+        return tank2Rect;
+    }
+
+    public Texture getW_1() {
+        return w_1;
+    }
+
+    public Rectangle getWeapon1Rect() {
+        return weapon1Rect;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public TextureAtlas getTextu() {
+        return textu;
+    }
+
+    public Sprite getBomb() {
+        return bomb;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public box2d getModel() {
+        return model;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+    public Box2DDebugRenderer getDebugRenderer() {
+        return debugRenderer;
+    }
+
+    public Body getPlayer1Body() {
+        return player1Body;
+    }
+
+    public gameLoader getGameNow() {
+        return gameNow;
+    }
+
+    public Body getPlayer2Body() {
+        return player2Body;
+    }
+
+    public Body getWeapon1Body() {
+        return weapon1Body;
+    }
+
+    public Texture getGroundImage() {
+        return groundImage;
+    }
+
+    public Body getGroundBody() {
+        return groundBody;
+    }
+
+    public int getA() {
+        return a;
+    }
+
+    public Body getTestWeapon() {
+        return testWeapon;
+    }
+
+    public float getVIRTUAL_HEIGHT() {
+        return VIRTUAL_HEIGHT;
+    }
+
+    public float getScaling() {
+        return scaling;
+    }
+
+    public Texture getTurn_g() {
+        return turn_g;
+    }
+
+    public Texture getTurn_r() {
+        return turn_r;
+    }
+
+    public Body getWeaponbody() {
+        return weaponbody;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public Vector2 getTrajPosVec() {
+        return trajPosVec;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public Texture getHealthImage1() {
+        return healthImage1;
+    }
+
+    public Rectangle getHealthBounds1() {
+        return healthBounds1;
+    }
+
+    public Texture getHealthImage2() {
+        return healthImage2;
+    }
+
+    public Rectangle getHealthBounds2() {
+        return healthBounds2;
+    }
+
+    public Texture getHealth2Image1() {
+        return health2Image1;
+    }
+
+    public Rectangle getHealth2Bounds1() {
+        return health2Bounds1;
+    }
+
+    public Texture getHealth2Image2() {
+        return health2Image2;
+    }
+
+    public Rectangle getHealth2Bounds2() {
+        return health2Bounds2;
+    }
+
+    public Texture getW_2() {
+        return w_2;
+    }
+
+    public Texture getW_3() {
+        return w_3;
+    }
+
+    public TextureRegion getPauseregion() {
+        return pauseregion;
+    }
+
+    public TextureRegionDrawable getPausedrawable() {
+        return pausedrawable;
+    }
+
+    public ImageButton getPausebutton() {
+        return pausebutton;
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public int getW1() {
+        return w1;
+    }
+
+    public int getW2() {
+        return w2;
+    }
+
+    public float getAccumulator() {
+        return accumulator;
+    }
+
     private Body player2Body;
     private Body weapon1Body;
     private Texture groundImage;
@@ -91,6 +337,8 @@ public class currgame extends ApplicationAdapter implements Screen {
     private TextureRegionDrawable pausedrawable;
     private ImageButton pausebutton;
     private Stage stage;
+    int w1;
+    int w2;
     public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height) {
         region = new TextureRegion(new Texture(address));
         drawable = new TextureRegionDrawable(region);
@@ -99,12 +347,14 @@ public class currgame extends ApplicationAdapter implements Screen {
         button.setSize(width, height);
         return button;
     }
-    public currgame(final Very_Tank game, tank t1, tank t2) {
+    public gameLoader(final Very_Tank game, tank t1, tank t2, int w1, int w2, Body tank1body, Body tank2body, int turn1) {
         player1_tank = t1;
         player2_tank = t2;
-//        this.player1_tank = new tank(100, 100, 40, 100, 90, 40, 90, "t1", new Texture("tan2_img.png"));
-//        this.player2_tank = new tank(1000, 100, 40, 100, 90, 40, 90, "t2", new Texture("tan2_img_inverted.png"));
         this.game = game;
+        this.w1=w1;
+        this.w2=w2;
+        this.turn=turn1;
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         camera = new OrthographicCamera();
@@ -114,13 +364,15 @@ public class currgame extends ApplicationAdapter implements Screen {
         player1 = new new_game(game);
         debugRenderer = new Box2DDebugRenderer(true, true, true, true, true, true);
         groundImage = new Texture(Gdx.files.internal("ground.png"));
-        tank1 = new Texture("tank1_img.png");
-        tank2 = new Texture("tan2_img_inverted.png");
+//        tank1 = new Texture("tank1_img.png");
+//        tank2 = new Texture("tan2_img_inverted.png");
         w_1 = new Texture("spritesheet.png");
         w_2 = new Texture("weapon2.png");
         w_3 = new Texture("weapon3.png");
         turn_g = new Texture("turn_g.png");
         turn_r = new Texture("turn_r.png");
+
+
         healthImage1 = new Texture(Gdx.files.internal("health.png"));
         healthBounds1 = new Rectangle((int) (0.2375 * (Gdx.graphics.getWidth())), (int) (Gdx.graphics.getHeight() - 0.084 * Gdx.graphics.getHeight()), (int) (0.208 * Gdx.graphics.getWidth()), (int) (0.056 * Gdx.graphics.getHeight()));
 
@@ -133,6 +385,8 @@ public class currgame extends ApplicationAdapter implements Screen {
         health2Image2 = new Texture(Gdx.files.internal("health2.png"));
         health2Bounds2 = new Rectangle((int) (Gdx.graphics.getWidth() - 0.435 * (Gdx.graphics.getWidth())), (int) (Gdx.graphics.getHeight() - 0.08 * Gdx.graphics.getHeight()), (int) (0.203125 * Gdx.graphics.getWidth()), (int) (0.04907 * Gdx.graphics.getHeight()));
         pausebutton = buttonmaker("pausebutton.png", pauseregion, pausedrawable, pausebutton, 100, 900, 80, 80);
+
+
         stage.addActor(pausebutton);
         Sprite sprite = new Sprite(w_1);
         sprite.setScale(1 / 100f);
@@ -140,14 +394,16 @@ public class currgame extends ApplicationAdapter implements Screen {
 //        w_1 = new Texture("w1.jpeg");
 //        sprite = new Sprite(w_1,180,460,100,100);
 //        sprite.rotate(90);
-        weapon1Rect = new Rectangle(180, 460, 100, 100);
-        tank1Rect = new Rectangle(100, 322, 300, 200);
-        tank2Rect = new Rectangle(1000, 318, 300, 200);
+
+
+//        weapon1Rect = new Rectangle(180, 460, 100, 100);
+//        tank1Rect = new Rectangle(100, 322, 300, 200);
+//        tank2Rect = new Rectangle(1000, 318, 300, 200);
 //        weapon1 = new weapon(100, 100, 100, 100, weapon1Rect, w_1);
 //        player1_tank = new tank(100, 100, 100, 100, 100, 100, 100, tank1Rect, "player1");
 //        player2_tank = new tank(1000, 100, 100, 100, 100, 100, 100, tank2Rect, "player2");
-        player1Body = createplayerdynamic(100, 318, player1Body);
-        player2Body = createplayerdynamic(1000, 318, player2Body);
+        player1Body = tank1body;
+        player2Body = tank2body;
 
         weapon1Body = createPlayerkinematic(180, 460, weapon1Body);
         groundBody = createPlayerStatic(0, 0, groundBody, (int) (Gdx.graphics.getWidth() + 0.027 * (Gdx.graphics.getWidth())), (int) (Gdx.graphics.getHeight() - 0.634 * (Gdx.graphics.getHeight()) - 120));
@@ -174,23 +430,26 @@ public class currgame extends ApplicationAdapter implements Screen {
         pausebutton.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                gameLoader gameNow=new gameLoader(game, player1_tank,player2_tank,health2Bounds1.width, health2Bounds2.width,player1Body,player2Body,turn);
+                gameNow=new gameLoader(game, player1_tank,player2_tank,health2Bounds1.width, health2Bounds2.width,player1Body,player2Body,turn);
+
                 game.setScreen(new pausemenu(game,player1_tank,player2_tank,gameNow));
             }
         });
 
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.P))
-            //testWeapon = shoot(player1_tank, ((player1Body.getPosition().x)+250*scaling), ((player1Body.getPosition().y)+200*scaling), weapon1,10,60);
-            //testWeapon = shoot(player1_tank, 0, 0, weapon1,10,60);
+//        if (Gdx.input.isKeyPressed(Input.Keys.P))
+//            //testWeapon = shoot(player1_tank, ((player1Body.getPosition().x)+250*scaling), ((player1Body.getPosition().y)+200*scaling), weapon1,10,60);
+//            //testWeapon = shoot(player1_tank, 0, 0, weapon1,10,60);
+//
+////        drawTrajectory(0,0,100,100,45);
+////        drawTrajectory(0,0,100,100,90);
+//            for (int i = 0; i < 90; i++) {
+//                angle = i;
+//
+//            }
 
-//        drawTrajectory(0,0,100,100,45);
-//        drawTrajectory(0,0,100,100,90);
-            for (int i = 0; i < 90; i++) {
-                angle = i;
 
-            }
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(500, 500);
         final FixtureDef fixtureDef = new FixtureDef();
@@ -523,7 +782,7 @@ public class currgame extends ApplicationAdapter implements Screen {
                     //Vector2 traj = getTrajectoryPoint(new Vector2(player1Body.getPosition().x, player1Body.getPosition().y), new Vector2((1.25f / scaling) * xycomp.x, (1.25f / scaling) * xycomp.y), i);
                     Vector2 traj = getTrajectoryPoint(trajPosVec, new Vector2((speed / scaling) * xycomp.x, (speed / scaling) * xycomp.y), i);
                     trajPosVec = new Vector2(((player1Body.getPosition().x / scaling) + 250), ((player1Body.getPosition().y / scaling)) + 200);
-                    game.batch.draw(w_1, traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
+                    game.batch.draw(weapon1.getTexture(), traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
                 }
             } else {
                 for (int i = 0; i < 2000; i++) {
@@ -531,7 +790,7 @@ public class currgame extends ApplicationAdapter implements Screen {
                     //Vector2 traj = getTrajectoryPoint(new Vector2(player1Body.getPosition().x, player1Body.getPosition().y), new Vector2((1.25f / scaling) * xycomp.x, (1.25f / scaling) * xycomp.y), i);
                     Vector2 traj = getTrajectoryPoint(trajPosVec, new Vector2((speed / scaling) * xycomp.x, (speed / scaling) * xycomp.y), i);
                     trajPosVec = new Vector2(((player2Body.getPosition().x / scaling) + 250), ((player2Body.getPosition().y / scaling)) + 200);
-                    game.batch.draw(w_1, traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
+                    game.batch.draw(weapon1.getTexture(), traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
                 }
             }
         }
@@ -539,17 +798,17 @@ public class currgame extends ApplicationAdapter implements Screen {
 
         game.batch.draw(player1_tank.getTank(), player1Body.getPosition().x / scaling, player1Body.getPosition().y / scaling, 300, 200);
         game.batch.draw(player2_tank.getTank(), player2Body.getPosition().x / scaling, player2Body.getPosition().y / scaling, 300, 200);
-        game.batch.draw(w_1, player1Body.getPosition().x / scaling, player1Body.getPosition().y / scaling, 10, 10);
+        //game.batch.draw(w_1, player1Body.getPosition().x / scaling, player1Body.getPosition().y / scaling, 10, 10);
         game.batch.draw(healthImage1, healthBounds1.x, healthBounds1.y, healthBounds1.width, healthBounds1.height);
         game.batch.draw(healthImage2, healthBounds2.x, healthBounds2.y, healthBounds2.width, healthBounds2.height);
-        game.batch.draw(health2Image1, health2Bounds1.x, health2Bounds1.y, health2Bounds1.width, health2Bounds1.height);
-        game.batch.draw(health2Image2, health2Bounds2.x, health2Bounds2.y, health2Bounds2.width / 2, health2Bounds2.height / 2, health2Bounds2.width, health2Bounds2.height, 1, 1, 0, 0, 0, 798, 98, false, true);
+        game.batch.draw(health2Image1, health2Bounds1.x, health2Bounds1.y, w1, health2Bounds1.height);
+        game.batch.draw(health2Image2, health2Bounds2.x, health2Bounds2.y, health2Bounds2.width / 2, health2Bounds2.height / 2, w2, health2Bounds2.height, 1, 1, 0, 0, 0, 798, 98, false, true);
 //        testWeapon.getPosition().x=player1Body.getPosition().x;
 //        testWeapon.getPosition().y=player1Body.getPosition().y;
         if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
             weapon1 =new weapon(10, 100, 100, 100, weapon1Rect, w_3);
         } else if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
-                weapon1 = new weapon(5, 100, 100, 100, weapon1Rect, w_2);
+            weapon1 = new weapon(5, 100, 100, 100, weapon1Rect, w_2);
         }
         else if (Gdx.input.isKeyJustPressed(Input.Keys.J)) {
             weapon1 = new weapon(7, 100, 100, 100, weapon1Rect, w_1);

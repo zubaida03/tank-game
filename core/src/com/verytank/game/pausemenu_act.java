@@ -75,8 +75,10 @@ public class pausemenu_act implements Screen {
 
     private tank tan1;
     private tank tan2;
+    private gameLoader gameNow;
 
-    public pausemenu_act(final Very_Tank game,tank tank1,tank tank2) {
+    public pausemenu_act(final Very_Tank game, tank tank1, tank tank2, final gameLoader gameNow) {
+        this.gameNow=gameNow;
         this.tan1 = tank1;
         this.tan2 = tank2;
         this.game = game;
@@ -137,7 +139,7 @@ public class pausemenu_act implements Screen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new currgame(game,tan1,tan2));
+                game.setScreen(new gameLoader(game,gameNow.getPlayer1_tank(),gameNow.getPlayer2_tank(),gameNow.getW1(), gameNow.getW2(), gameNow.getPlayer1Body(),gameNow.getPlayer2Body(),gameNow.getTurn()));
             }
         });
         exitGame=buttonmaker("exit_game.png", exitRegion,exitDrawable,exitGame,(pausemenuBounds.x+150), pausemenuBounds.y + 175, 200, 100);

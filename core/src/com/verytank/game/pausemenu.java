@@ -55,7 +55,9 @@ public class pausemenu implements Screen {
     private int height2 = 800;
     private Texture pausemenuImage;
     private Rectangle pausemenuBounds;
-    public pausemenu(Very_Tank game,tank tank1,tank tank2) {
+    private gameLoader gameNow;
+    public pausemenu(Very_Tank game,tank tank1,tank tank2, gameLoader gameNow) {
+        this.gameNow=gameNow;
         this.tank1 = tank1;
         this.tank2 = tank2;
         batch= new SpriteBatch();
@@ -121,7 +123,7 @@ public class pausemenu implements Screen {
 //
         if (width2>Gdx.graphics.getWidth()/2){
             width2-=7;
-            game.setScreen(new pausemenu_act(game,tank1,tank2));
+            game.setScreen(new pausemenu_act(game,tank1,tank2,gameNow));
 
 
 //            game.setScreen(new actuallogin((game)));
@@ -129,7 +131,7 @@ public class pausemenu implements Screen {
         if (Math.abs(height)>Gdx.graphics.getWidth()/2){
             width+=7;
 
-            game.setScreen(new pausemenu_act(game,tank1,tank2));
+            game.setScreen(new pausemenu_act(game,tank1,tank2,gameNow));
         }
 
         game.batch.enableBlending();
