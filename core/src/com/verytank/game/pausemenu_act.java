@@ -6,15 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.awt.*;
 
@@ -48,39 +40,13 @@ public class pausemenu_act implements Screen {
 
     private Texture vsImage;
     private Rectangle vsBounds;
-    private Stage stage;
 
     private Texture pauseImage;
     private Rectangle pauseBounds;
     private Texture pausemenuImage;
     private Rectangle pausemenuBounds;
-    private Texture pausedGameImage;
-    private Rectangle pausedGameBounds;
-    private Texture saveGameImage;
-    private Rectangle saveGameBounds;
-    private Texture exitGameImage;
-    private Rectangle exitGameBounds;
-    private Texture returnImage;
-    private Rectangle returnBounds;
-    private TextureRegion saveRegion;
-    private TextureRegion exitRegion;
-    private TextureRegion returnRegion;
-    private TextureRegionDrawable saveDrawable;
-    private TextureRegionDrawable exitDrawable;
-    private TextureRegionDrawable returnDrawable;
-
-    ImageButton saveButton;
-    ImageButton exitGame;
-    ImageButton resumeButton;
-
-    private tank tan1;
-    private tank tan2;
-
-    public pausemenu_act(final Very_Tank game,tank tank1,tank tank2) {
-        this.tan1 = tank1;
-        this.tan2 = tank2;
+    public pausemenu_act(Very_Tank game) {
         this.game = game;
-        stage = new Stage(new ScreenViewport());
         backgroundImage = new Texture(Gdx.files.internal("game_background.png"));
         backgroundBounds = new Rectangle(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         groundImage=new Texture(Gdx.files.internal("ground.png"));
@@ -107,62 +73,9 @@ public class pausemenu_act implements Screen {
 
         vsImage =new Texture("vs.png");
         vsBounds=new Rectangle(456+65+400+3,Gdx.graphics.getHeight()-125, 100,100 );
-        pausemenuImage = new Texture(Gdx.files.internal("pause_menu.png"));
+        pausemenuImage = new Texture(Gdx.files.internal("pause_img.png"));
         pausemenuBounds = new Rectangle(Gdx.graphics.getWidth()/2-200, Gdx.graphics.getHeight()/2 - 300, 500, 600);
 
-        pausedGameImage = new Texture(Gdx.files.internal("paused_game.png"));
-        pausedGameBounds = new Rectangle((int)(pausemenuBounds.x+150), pausemenuBounds.y + 475, 200, 100);
-
-        saveGameImage = new Texture(Gdx.files.internal("saved_game.png"));
-        saveGameBounds = new Rectangle((int)(pausemenuBounds.x+150), pausemenuBounds.y + 325, 200, 100);
-
-        exitGameImage = new Texture(Gdx.files.internal("exit_game.png"));
-        exitGameBounds = new Rectangle((int)(pausemenuBounds.x+150), pausemenuBounds.y + 175, 200, 100);
-
-        returnImage = new Texture(Gdx.files.internal("return.png"));
-        returnBounds = new Rectangle((int)(pausemenuBounds.x+150), pausemenuBounds.y + 25, 200, 100);
-        Gdx.input.setInputProcessor(stage);
-
-        saveButton=buttonmaker("saved_game.png",saveRegion,saveDrawable,saveButton,(pausemenuBounds.x+150),pausemenuBounds.y + 325, 200, 100);
-
-        saveButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new saved_Games(game));
-            }
-        });
-
-
-        resumeButton=buttonmaker("return.png", returnRegion,returnDrawable,resumeButton,(pausemenuBounds.x+150), pausemenuBounds.y + 25, 200, 100);
-        resumeButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new currgame(game,tan1,tan2));
-            }
-        });
-        exitGame=buttonmaker("exit_game.png", exitRegion,exitDrawable,exitGame,(pausemenuBounds.x+150), pausemenuBounds.y + 175, 200, 100);
-        exitGame.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new actuallogin(game));
-            }
-        });stage.addActor(saveButton);
-        stage.addActor(resumeButton);
-        stage.addActor(exitGame);
-
-
-
-
-    }
-
-    public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height) {
-        region = new TextureRegion(new Texture(address));
-        drawable = new TextureRegionDrawable(region);
-        button = new ImageButton(drawable);
-        button.setPosition(x, y);
-        button.setSize(width, height);
-        stage.addActor(button);
-        return button;
     }
 
     @Override
@@ -199,18 +112,7 @@ public class pausemenu_act implements Screen {
         Gdx.gl.glDisable(GL20.GL_BLEND);
         game.batch.begin();
         game.batch.draw(pausemenuImage,pausemenuBounds.x,pausemenuBounds.y,pausemenuBounds.width,pausemenuBounds.height);
-////
-        game.batch.draw(pausedGameImage,pausedGameBounds.x,pausedGameBounds.y,pausedGameBounds.width,pausedGameBounds.height);
-////
-////        game.batch.draw(saveGameImage,saveGameBounds.x,saveGameBounds.y,saveGameBounds.width,saveGameBounds.height);
-////
-////        game.batch.draw(exitGameImage,exitGameBounds.x,exitGameBounds.y,exitGameBounds.width,exitGameBounds.height);
-////
-////        game.batch.draw(returnImage,returnBounds.x,returnBounds.y,returnBounds.width,returnBounds.height);
-//
         game.batch.end();
-        stage.act();
-        stage.draw();
 //        return 0;
     }
 
