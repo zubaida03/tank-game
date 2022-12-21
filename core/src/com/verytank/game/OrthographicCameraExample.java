@@ -56,6 +56,10 @@ public class OrthographicCameraExample implements ApplicationListener {
         batch.end();
     }
 
+    public OrthographicCamera getCam() {
+        return cam;
+    }
+
     private void handleInput() {
 //        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
 //            cam.zoom += 0.02;
