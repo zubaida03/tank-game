@@ -92,28 +92,28 @@ public class saved_Games implements Screen {
         tank1.getAnimation();
         game.batch.begin();
 
-        for(i=1;i<saved_game.getInstance().getSaved().size();i++){
-            player p1 = saved_game.getSaved().get(i).get(0);
-            player p2 = saved_game.getSaved().get(i).get(1);
-            game.batch.draw(p1.getTank().getTank(),100,Gdx.graphics.getHeight()-100*i,300,200);
-            game.batch.draw(p2.getTank().getTank(),1000,Gdx.graphics.getHeight()-100*i,300,200);
-            i++;
-        }
-//        game.batch.draw(name,nameRect.x,nameRect.y,nameRect.width,nameRect.height);
-//        game.batch.draw(selectanks,selectanksRect.x,selectanksRect.y,selectanksRect.width,selectanksRect.height);
-//        game.batch.draw((TextureRegion) tank3.getAnimation().getKeyFrame(elapsedTime, true), 400, 600);
-//        game.batch.draw((TextureRegion) tank2.getAnimation().getKeyFrame(elapsedTime, true), 1200, 600);
-//        game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 400, 400);
-//        game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 1200, 200);
-//        game.batch.draw((TextureRegion) tank3.getAnimation().getKeyFrame(elapsedTime, true), 1200, 400);
-//        game.batch.draw((TextureRegion) tank2.getAnimation().getKeyFrame(elapsedTime, true), 400, 200);
-//        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y-200,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y-400,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y-200,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y-400,avatar_nameRect.width,avatar_nameRect.height);
-//        game.batch.draw(saved,savedRect.x,savedRect.y,savedRect.width,savedRect.height);
+//        for(i=1;i<saved_game.getInstance().getSaved().size();i++){
+//            player p1 = saved_game.getSaved().get(i).get(0);
+//            player p2 = saved_game.getSaved().get(i).get(1);
+//            game.batch.draw(p1.getTank().getTank(),100,Gdx.graphics.getHeight()-100*i,300,200);
+//            game.batch.draw(p2.getTank().getTank(),1000,Gdx.graphics.getHeight()-100*i,300,200);
+//            i++;
+//        }
+        game.batch.draw(name,nameRect.x,nameRect.y,nameRect.width,nameRect.height);
+        game.batch.draw(selectanks,selectanksRect.x,selectanksRect.y,selectanksRect.width,selectanksRect.height);
+        game.batch.draw((TextureRegion) tank3.getAnimation().getKeyFrame(elapsedTime, true), 400, 600);
+        game.batch.draw((TextureRegion) tank2.getAnimation().getKeyFrame(elapsedTime, true), 1200, 600);
+        game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 400, 400);
+        game.batch.draw((TextureRegion) tank1.getAnimation().getKeyFrame(elapsedTime, true), 1200, 200);
+        game.batch.draw((TextureRegion) tank3.getAnimation().getKeyFrame(elapsedTime, true), 1200, 400);
+        game.batch.draw((TextureRegion) tank2.getAnimation().getKeyFrame(elapsedTime, true), 400, 200);
+        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y-200,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(avatar_name,avatar_nameRect.x,avatar_nameRect.y-400,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y-200,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(avatar_name,avatar_nameRect.x+1400,avatar_nameRect.y-400,avatar_nameRect.width,avatar_nameRect.height);
+        game.batch.draw(saved,savedRect.x,savedRect.y,savedRect.width,savedRect.height);
 
 
         game.batch.end();

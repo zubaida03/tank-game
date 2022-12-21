@@ -30,7 +30,7 @@ public class Very_Tank extends Game {
 		batch = new SpriteBatch();
 		shapeRenderer = new ShapeRenderer();
 		font = new BitmapFont();
-		setScreen((Screen) new new_game_tank_confirm(this));
+		setScreen((Screen) new LoginScreen(this));
 	}
 
 

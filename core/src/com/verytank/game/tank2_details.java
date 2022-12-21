@@ -95,7 +95,12 @@ public class tank2_details implements Screen {
         back_button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new new_game(game));
+                if (new_game_tank_confirm.isPlayerwho()){
+                    game.setScreen(new new_game_2(game, new_game_tank_confirm));
+                }
+                else {
+                    game.setScreen(new new_game(game));
+                }
             }
         });
 

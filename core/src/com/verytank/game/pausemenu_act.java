@@ -139,7 +139,8 @@ public class pausemenu_act implements Screen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new gameLoader(game,gameNow.getPlayer1_tank(),gameNow.getPlayer2_tank(),gameNow.getW1(), gameNow.getW2(), gameNow.getPlayer1Body(),gameNow.getPlayer2Body(),gameNow.getTurn()));
+//                game.setScreen(new gameLoader(game,gameNow.getPlayer1_tank(),gameNow.getPlayer2_tank(),gameNow.getW1(), gameNow.getW2(), gameNow.getPlayer1Body(),gameNow.getPlayer2Body(),gameNow.getTurn()));
+                game.setScreen(new currgame(game,tan1,tan2));
             }
         });
         exitGame=buttonmaker("exit_game.png", exitRegion,exitDrawable,exitGame,(pausemenuBounds.x+150), pausemenuBounds.y + 175, 200, 100);

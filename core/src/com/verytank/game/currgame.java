@@ -91,6 +91,7 @@ public class currgame extends ApplicationAdapter implements Screen {
     private TextureRegionDrawable pausedrawable;
     private ImageButton pausebutton;
     private Stage stage;
+    private gameLoader gamenow;
     public ImageButton buttonmaker(String address, TextureRegion region, TextureRegionDrawable drawable, ImageButton button, float x, float y, float width, float height) {
         region = new TextureRegion(new Texture(address));
         drawable = new TextureRegionDrawable(region);
@@ -99,7 +100,12 @@ public class currgame extends ApplicationAdapter implements Screen {
         button.setSize(width, height);
         return button;
     }
+//    public void loader(gameLoader gamenow){
+//        gamenow = new gameLoader(gamenow.getGame(),gamenow.getPlayer1_tank(),gamenow.getPlayer2_tank(),gamenow.getHealth2Bounds1().width,gamenow.getHealth2Bounds2().width,gamenow.getPlayer1Body(),gamenow.getPlayer2Body(),gamenow.getTurn());
+//        game.setScreen(gamenow);
+//    }
     public currgame(final Very_Tank game, tank t1, tank t2) {
+    //    this.gamenow = gameNow;
         player1_tank = t1;
         player2_tank = t2;
 //        this.player1_tank = new tank(100, 100, 40, 100, 90, 40, 90, "t1", new Texture("tan2_img.png"));
