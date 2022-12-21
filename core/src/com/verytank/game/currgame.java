@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.FrictionJointDef;
@@ -52,27 +54,17 @@ public class currgame extends ApplicationAdapter implements Screen {
     private float scaling= 0.01f;
     private Texture turn_g;
     private Texture turn_r;
+    private Body weaponbody;
+    private float speed =1;
+    Vector2 trajPosVec ;
     private int turn = 0;
 
     public currgame(Very_Tank game) {
         this.player1_tank = new tank(100, 100, 40, 100, 90, 40, 90, "t2",new Texture("tan2_img.png"));
         this.player2_tank = new tank(1000, 100, 40, 100, 90, 40, 90,"t2" ,new Texture("tan2_img_inverted.png"));
         this.game = game;
-//        camera = new OrthographicCamera(1920/100, 1080/100);
-
-// fix camera to the center of the screen
-//        camera.position.set(1920/100/2f, 1080/100/2f, 0);
-
-//        camera.update();
-        //        camera.setToOrtho(false, 100, 44);
-
-        //camera = new OrthographicCamera(10, 0.4f);
         camera = new OrthographicCamera();
-        //camera.position.set(1920 / 200f, 1080f / 200f, 0);
-        //camera.update();
         ExtendViewport viewport = new ExtendViewport(50, 50, camera);
-        //vp.setUnitsPerPixel(1/100f);
-
         world = new World(new Vector2(0, -981f*scaling), true);
         background = new GameScreen(game);
         player1 = new new_game(game);
@@ -133,8 +125,68 @@ public class currgame extends ApplicationAdapter implements Screen {
             //drawTrajectory(0,0,1,1,angle);
 
         }
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(500, 500);
+        final FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 1f;
+        if (testWeapon != null) {
+            testWeapon.createFixture(fixtureDef);
+        }
+    //        fixture_Creator(weaponbody);
+//        world.setContactListener(new ContactListener() {
+//            @Override
+//            public void beginContact(Contact contact) {
+//                System.out.println(fixtureDef.density);
+//                // Check to see if the collision is between the second sprite and the bottom of the screen
+//                // If so apply a random amount of upward force to both objects... just because
+//                if((contact.getFixtureA().getBody().getUserData() == testWeapon &&
+//                        contact.getFixtureB().getBody().getUserData() == player2Body)
+//                        ||
+//                        (contact.getFixtureA().getBody().getUserData() == testWeapon &&
+//                                contact.getFixtureB().getBody().getUserData() == player2Body)) {
+////                    player1Body.setLinearVelocity(-30*scaling, 0);
+//                    player2Body.setLinearVelocity(100*scaling, 0);
+////                    player1Body.applyForceToCenter( MathUtils.random(20,50),0,true);
+////                    player2Body.applyForceToCenter(MathUtils.random(20,50),0, true);
+//                }
+//            }
+//
+//            @Override
+//            public void endContact(Contact contact) {
+//            }
+//
+//            @Override
+//            public void preSolve(Contact contact, Manifold oldManifold) {
+//            }
+//
+//            @Override
+//            public void postSolve(Contact contact, ContactImpulse impulse) {
+//            }
+//        });
+    }
+//    public static boolean overlaps(Rectangle r1,Rectangle r2){
+//        if
+//    }
 
+    public boolean collision_checker(Body body,Body body2){
+        Rectangle t_rect = new Rectangle((int) body.getPosition().x+1,(int)body.getPosition().y, (2),1);
+        Rectangle w_rect = new Rectangle((int)body2.getPosition().x,(int)body2.getPosition().y,1,1);
+        if (t_rect.intersects(w_rect)){
+            System.out.println(t_rect.getBounds());
+            //System.out.println(t_rect.getLocation());
+            System.out.println(t_rect.y);
+            System.out.println(w_rect.getBounds());
+            return true;
+        }
+//        if (Math.abs(t_rect.x-w_rect.x)<t_rect.width/2+w_rect.width/2 || Math.abs(t_rect.y-w_rect.y)<t_rect.height/2 + w_rect.height/2){
+//            return true;
+//        }
+        return false;
 
+//        if (body..overlaps(w_rect)){
+//            System.out.println("collision");
+//        }
     }
 
     private Body createPlayerStatic(float x, float y, Body body, int width, int height) {
@@ -166,12 +218,16 @@ public class currgame extends ApplicationAdapter implements Screen {
         def.type = BodyDef.BodyType.DynamicBody;
         def.position.set(a*scaling, b*scaling);
         def.fixedRotation = true;
-//        body.setUserData(tank1);
-//        FixtureDef fd = new FixtureDef();
-//        fd.density = 1;
+//        body.setUserData(tank1);\
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(50*scaling,50*scaling );
+        FixtureDef fd = new FixtureDef();
+        fd.density = 26f;
+        fd.shape = shape;
 //        fd.friction = 0.5f;
 //        fd.restitution = 0.3f;
         body = world.createBody(def);
+        body.createFixture(fd);
         return body;
     }
 
@@ -188,7 +244,13 @@ public class currgame extends ApplicationAdapter implements Screen {
 
         return startingPosition.add(stepVelocity.scl(n).add(stepGravity.scl(0.5f * (n * n + n))));
     }
-
+    public void fixture_Creator(Body body){
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(10, 10);
+        body.createFixture(shape, 0.0f);
+        shape.dispose();
+    }
+//    weaponbod
     public Body shoot(tank tank,float weaponX,float weaponY, weapon weapon, float speed, float angle) {
         //float weaponX = tank.getCurrX();
         //float weaponY = tank.getCurrY();
@@ -197,22 +259,17 @@ public class currgame extends ApplicationAdapter implements Screen {
         weapon.setXcurr(weaponX);
         weapon.setYcurr(weaponY);
         BodyDef weaponDef = new BodyDef();
-//        weaponDef.bullet = true;
         weaponDef.type = BodyDef.BodyType.DynamicBody;
         weaponDef.position.set(weaponX, weaponY);
+
         Body weaponBody = world.createBody(weaponDef);
-        weaponBody.setTransform(weaponBody.getPosition().x, weaponBody.getPosition().y, angle);
-        PolygonShape weaponShape = new PolygonShape();
-        weaponShape.setAsBox(weapon.getTexture().getWidth()*scaling, weapon.getTexture().getHeight()*scaling);
-        //weaponBody.setGravityScale(9.8f);
-        FixtureDef weaponFixture = new FixtureDef();
-
-        //private float fixtureHeight = texture.getHeight() * ratio;
-        weaponFixture.shape = weaponShape;
-        weaponFixture.density = 26f;
-        weaponFixture.friction = 0.5f;
-
+//        weaponBody.setGravityScale(9.8f);
         Vector2 xycomp = getSpeed(angle);
+        weaponBody.setTransform(weaponBody.getPosition().x, weaponBody.getPosition().y, angle);
+        weaponBody.applyLinearImpulse(xycomp.x*speed,xycomp.y*speed,weaponBody.getWorldCenter().x, weaponBody.getWorldCenter().y,true);
+//        fixture.setUserData(weapon);
+//        fixture.setFilterData(new Filter());
+//        weaponFixture.friction = 0.5f;
 //        for (int i=0; i<1920; i++){
 //            Vector2 traj=getTrajectoryPoint(new Vector2(0,0), new Vector2(100*xycomp.x,100*xycomp.y),i);
 //            weaponBody.setLinearVelocity(25f,100f);
@@ -223,12 +280,9 @@ public class currgame extends ApplicationAdapter implements Screen {
         //Vector2 startingVelocity =new Vector2(1000,1000);
         //startingVelocity.rotateDeg((float) angle - 45);
         //weaponBody.setLinearVelocity(startingVelocity);
-
-        weaponBody.setLinearVelocity(speed* xycomp.x, speed * xycomp.y);
         //weaponBody.applyLinearImpulse(500f,500f, weaponBody.getPosition().x,weaponBody.getPosition().y,true);
-        weaponBody.setAwake(true);
-
-
+//        weaponBody.setAwake(true);
+//        weaponShape.dispose();
         return weaponBody;
         //weaponBody=createPlayerkinematic(weaponX,weaponY,weaponBody);
 
@@ -271,12 +325,14 @@ public class currgame extends ApplicationAdapter implements Screen {
 
     }
 
-
     @Override
     public void render(float delta) {
         stepWorld();
 //        player1.show();
 //        player1.render(delta);
+//        collision(player2Body,testWeapon);
+
+
         update(Gdx.graphics.getDeltaTime());
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -291,7 +347,7 @@ public class currgame extends ApplicationAdapter implements Screen {
                 player1Body.setTransform(player1Body.getPosition().x - 0.05f, player1Body.getPosition().y, 0);
             if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && tank1Rect.x < Gdx.graphics.getWidth() - 300)
                 player1Body.setTransform(player1Body.getPosition().x + 0.05f, player1Body.getPosition().y, 0);
-            if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
                 missile_fired(1);
             }
         }
@@ -324,6 +380,8 @@ public class currgame extends ApplicationAdapter implements Screen {
 //        }
         game.batch.begin();
 
+        trajPosVec=new Vector2(((player1Body.getPosition().x/scaling)+250), ((player1Body.getPosition().y/scaling))+200);
+
         if(!Gdx.input.isKeyPressed(Input.Keys.P))
         {
             if(Gdx.input.isKeyPressed(Input.Keys.UP)){
@@ -333,15 +391,41 @@ public class currgame extends ApplicationAdapter implements Screen {
                 angle=angle-1;
             }
 
+            if (Gdx.input.isKeyPressed(Input.Keys.W)){
+                speed=speed+0.25f;
+                if (speed>20){
+                    speed=20;
+                }
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.S)){
+                speed=speed-0.25f;
+                if (speed<=0){
+                    speed=1;
+                }
+            }
 
             Vector2 xycomp = getSpeed(angle);
-            for (int i = 0; i < 2000; i++) {
-                //Vector2 traj = getTrajectoryPoint(new Vector2(player1Body.getPosition().x, player1Body.getPosition().y), new Vector2((1.25f / scaling) * xycomp.x, (1.25f / scaling) * xycomp.y), i);
-                Vector2 traj = getTrajectoryPoint(new Vector2(((player1Body.getPosition().x/scaling)+250), ((player1Body.getPosition().y/scaling))+200), new Vector2((10f / scaling) * xycomp.x, (10f / scaling) * xycomp.y), i);
+            if (turn==0) {
+                for (int i = 0; i < 2000; i++) {
 
-                game.batch.draw(w_1, traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
+                    //Vector2 traj = getTrajectoryPoint(new Vector2(player1Body.getPosition().x, player1Body.getPosition().y), new Vector2((1.25f / scaling) * xycomp.x, (1.25f / scaling) * xycomp.y), i);
+                    Vector2 traj = getTrajectoryPoint(trajPosVec, new Vector2((speed / scaling) * xycomp.x, (speed / scaling) * xycomp.y), i);
+                    trajPosVec=new Vector2(((player1Body.getPosition().x/scaling)+250), ((player1Body.getPosition().y/scaling))+200);
+                    game.batch.draw(w_1, traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
+                }
+            }
+            else{
+                for (int i = 0; i < 2000; i++) {
+
+                    //Vector2 traj = getTrajectoryPoint(new Vector2(player1Body.getPosition().x, player1Body.getPosition().y), new Vector2((1.25f / scaling) * xycomp.x, (1.25f / scaling) * xycomp.y), i);
+                    Vector2 traj = getTrajectoryPoint(trajPosVec, new Vector2((speed / scaling) * xycomp.x, (speed / scaling) * xycomp.y), i);
+                    trajPosVec=new Vector2(((player2Body.getPosition().x/scaling)+250), ((player2Body.getPosition().y/scaling))+200);
+                    game.batch.draw(w_1, traj.x, traj.y, (int) player1_tank.getCurrX(), (int) player1_tank.getCurrY(), 20, 50);
+                }
             }
         }
+
+
 
 
 
@@ -351,7 +435,11 @@ public class currgame extends ApplicationAdapter implements Screen {
 //        testWeapon.getPosition().x=player1Body.getPosition().x;
 //        testWeapon.getPosition().y=player1Body.getPosition().y;
         if(Gdx.input.isKeyPressed(Input.Keys.P)) {
-            testWeapon = shoot(player1_tank, ((player1Body.getPosition().x)+250*scaling), ((player1Body.getPosition().y)+200*scaling), weapon1,10,(float)angle);
+            if (turn==1)
+                testWeapon = shoot(player1_tank, ((player1Body.getPosition().x)+250*scaling), ((player1Body.getPosition().y)+200*scaling), weapon1,speed,(float)angle);
+            else
+                testWeapon = shoot(player2_tank, ((player2Body.getPosition().x)+250*scaling), ((player2Body.getPosition().y)+200*scaling), weapon1,speed,(float)angle);
+
             //game.batch.draw(w_1, testWeapon.getPosition().x / scaling, testWeapon.getPosition().y / scaling, 0, 0, 50, 50, 1, 1, testWeapon.getAngle(), 0, 0, (int) (w_1.getTextureData().getWidth()), (int) (w_1.getTextureData().getHeight()), false, false);
         }
         if(testWeapon==null){
@@ -359,6 +447,10 @@ public class currgame extends ApplicationAdapter implements Screen {
         }
         else{
             game.batch.draw(w_1, testWeapon.getPosition().x / scaling, testWeapon.getPosition().y / scaling, 0, 0, 50, 50, 1, 1, testWeapon.getAngle(), 0, 0, (int) (w_1.getTextureData().getWidth()), (int) (w_1.getTextureData().getHeight()), false, false);
+            if(collision_checker(player2Body, testWeapon)){
+                System.out.println("Collision");
+                player2Body.setLinearVelocity(50*scaling, 0);
+            }
 
         }
 
