@@ -83,7 +83,7 @@ public class tank2_details implements Screen {
                 System.out.println(new_game_tank_confirm.isPlayerwho());
                 if (new_game_tank_confirm.isPlayerwho()){
                     new_game_tank_confirm.setPlayer2_tank(new tank(1000, 100, 40, 100, 90, 40, 90,tank1_name ,new Texture("tan2_img_inverted.png")));
-//                    game.setScreen(new currgame(game, new_game_tank_confirm.getPlayer1_tank(), new_game_tank_confirm.getPlayer2_tank()));
+                    game.setScreen(new currgame(game, new_game_tank_confirm.getPlayer1_tank(), new_game_tank_confirm.getPlayer2_tank()));
                 }
                 else {
                     new_game_tank_confirm.setPlayer1_tank(new tank(100, 100, 40, 100, 90, 40, 90, tank1_name,new Texture("tan2_img.png")));
