@@ -97,7 +97,6 @@ public class currgame extends ApplicationAdapter implements Screen {
         button = new ImageButton(drawable);
         button.setPosition(x, y);
         button.setSize(width, height);
-//        stage.addActor(button);
         return button;
     }
     public currgame(final Very_Tank game, tank t1, tank t2) {
@@ -132,7 +131,7 @@ public class currgame extends ApplicationAdapter implements Screen {
 
         health2Image2 = new Texture(Gdx.files.internal("health2.png"));
         health2Bounds2 = new Rectangle((int) (Gdx.graphics.getWidth() - 0.435 * (Gdx.graphics.getWidth())), (int) (Gdx.graphics.getHeight() - 0.08 * Gdx.graphics.getHeight()), (int) (0.203125 * Gdx.graphics.getWidth()), (int) (0.04907 * Gdx.graphics.getHeight()));
-        pausebutton = buttonmaker("pausebutton.png", pauseregion, pausedrawable, pausebutton, 100, 800, 100, 100);
+        pausebutton = buttonmaker("pausebutton.png", pauseregion, pausedrawable, pausebutton, 100, 900, 80, 80);
         stage.addActor(pausebutton);
         Sprite sprite = new Sprite(w_1);
         sprite.setScale(1 / 100f);
@@ -188,7 +187,6 @@ public class currgame extends ApplicationAdapter implements Screen {
 //        drawTrajectory(0,0,100,100,90);
             for (int i = 0; i < 90; i++) {
                 angle = i;
-                //drawTrajectory(0,0,1,1,angle);
 
             }
         PolygonShape shape = new PolygonShape();
